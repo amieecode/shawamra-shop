@@ -1,6 +1,7 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import NavBar from "./Components/NavBar";
 
 const App = () => {
   useEffect (() => {
@@ -11,11 +12,10 @@ const App = () => {
       easing: 'ease-in'
     });
   }); 
+
   return(
     <div>
-      <h1 className="text-3xl font-bold underline">
-        Shawarma shop 
-      </h1>
+      <NavBar />
     </div>
   )
 }

@@ -5,7 +5,19 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        sans: ["Poppins", "sans-serif"],
+        cursive: ["Pacifico", "cursive"],
+      },
+      container:{
+        center: true,
+        padding:{
+          DEFAULT: "1em",
+          sm: "2em",
+        },
+      },
+    },
   },
   plugins: [],
 }
