@@ -10,6 +10,9 @@ export default {
         sans: ["Poppins", "sans-serif"],
         cursive: ["Pacifico", "cursive"],
       },
+      colors:{
+        brand: "#2da42b",
+      },
       container:{
         center: true,
         padding:{
