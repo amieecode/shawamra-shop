@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import NavBar from "./Components/NavBar";
 import Hero from "./Components/Hero";
+import Quotes from "./Components/quotes";
 
 const App = () => {
   useEffect (() => {
@@ -18,6 +19,7 @@ const App = () => {
     <div>
       <NavBar />
       <Hero />
+      <Quotes />
     </div>
   )
 }
