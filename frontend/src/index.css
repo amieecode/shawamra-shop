@@ -3,3 +3,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .brand-btn {
+        @apply bg-white px-6 py-2 border-2 border-black/60 text-black font-bold rounded-full hover:bg-white/70 hover:scale-105 duration-200;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(90deg);
+    }
+}
+    .spin{ 
+        animation: spin 40s  linear infinite;
+    }
+/*Smooth Scroll*/
+html{
+    scroll-behavior: smooth;
+}
