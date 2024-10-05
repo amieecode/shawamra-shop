@@ -68,8 +68,8 @@ const NavBar = () => {
           {/*Icons*/}
           <div className='hidden md:block'>
             <div className='flex items-center gap-6'>
-              <GoPerson className='text-white text-2xl' />
-              <CgShoppingCart className='text-white text-2xl' />
+              <GoPerson className='text-white text-2xl cursor-pointer' />
+              <CgShoppingCart className='text-white text-2xl cursor-pointer' />
             </div>
           </div>
           
