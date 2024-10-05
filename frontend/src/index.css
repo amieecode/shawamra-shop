@@ -21,6 +21,7 @@
     .spin{ 
         animation: spin 40s  linear infinite;
     }
+    
 /*Smooth Scroll*/
 html{
     scroll-behavior: smooth;
