@@ -4,6 +4,7 @@ import { CgShoppingCart } from "react-icons/cg";
 import { SiSaucelabs } from "react-icons/si";
 import { MdMenu } from "react-icons/md"
 import ResponsiveMenu from './ResponsiveMenu';
+import { motion } from "framer-motion";
 
 const Menus = [
   {
@@ -39,8 +40,12 @@ const NavBar = () => {
   return (
     <> 
       <nav className='bg-black text-white'>
-        <div className='container flex items-center justify-between py-6'>
-          
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className='container flex items-center justify-between py-8'
+        >
           {/*Logo section*/}
           <div className='flex items-center text-2xl font-cursive'>
             <a href='#' className='flex cursor-pointer gap-2'>
@@ -62,7 +67,7 @@ const NavBar = () => {
               </ul>
           </div>
 
-          {/*Icons*/}
+          {/*Icons section*/}
           <div className='flex items-center gap-6'>
             <button className='text-white text-2xl cursor-pointer'>
               <GoPerson />
@@ -77,7 +82,7 @@ const NavBar = () => {
               <MdMenu className="text-4xl cursor-pointer" />
             </div>
           </div>
-      </div>
+      </motion.div>
     </nav>
 
         {/*Mobile Nav Menu*/}

@@ -35,7 +35,7 @@ const Hero = () => {
                 <img 
                   src={HeroImg} 
                   alt=''
-                  className='w-[200px] sm:w-[350px] m-auto spin'
+                  className='w-[300px] sm:w-[450px] m-auto spin cursor-pointer'
                 />
               </div>
           </div>

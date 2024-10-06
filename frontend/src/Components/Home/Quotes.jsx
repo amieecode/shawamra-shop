@@ -4,7 +4,7 @@ const Quotes = () => {
   return (
     <div className='bg-black text-white'>
         <div data-aos="zoom-in" className='container py-14 px-6 text-center'>
-            <h1 className='text-2xl sm:text-4xl font-bold mb-2'>
+            <h1 className='text-2xl sm:text-4xl font-bold mb-4'>
                 A Taste of Tradition with a Modern Twist
             </h1>
             <p className='max-w-[960px] mx-auto text-center'>
