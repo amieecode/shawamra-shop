@@ -2,6 +2,7 @@ import React from 'react';
 import BeefImg from "../../assets/beef-wrap.png";
 import ChickenImg from "../../assets/Chicken-wrap.png";
 import KechupImg from "../../assets/kechup-wrap.png";
+import { color } from 'framer-motion';
 
 const SpecialtiesData =[
   {
@@ -31,27 +32,29 @@ const Specialties = () => {
   return (
     <>
       <span id="services"></span>
-        <div className='bg-black/95 text-white'>
-          <div className='container py-6 sm:py-4'>
+        <div className='py-10 overflow-hidden'>
+          <div className='container'>
             {/*Header Title*/}
-            <h2 className='font-bold text-2xl snm:text-3xl mb-8'>Our Shawarma Specialties </h2>
+            <h2 className='font-bold text-2xl sm:text-3xl mb-8'>
+              Our Shawarma Specialties
+            </h2>
 
             {/*Specialties card Section*/}
-            <div className='grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 place-items-center'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 place-items-center'>
               {SpecialtiesData.map((data, index) => (
                 <div
                   data-aos="fade-up" 
                   data-aos-delay={data.aosDelay}
                   key={index}
-                  className='rounded-b-[50px] rounded-t-[50px] border-2 border-white px-6 py-8 max-w-[300px] group relative'
+                  className='w-full max-w-[300px] rounded-b-[60px] rounded-t-[60px] border-2 border-white px-4 py-6 group relative'
                 >
 
                   {/*Image Section*/}
-                  <div className='h-[200px] justify-center items-center'>
+                  <div className='h-[200px] flex justify-center items-center'>
                     <img 
                       src={data.img}
                       alt={data.name}
-                      className='max-w-[180px] block mx-auto transform translate-x-14 group-hover:scale-110 group-hover:rotate-6 duration-300'
+                      className='max-w-[180px] items-center mx-auto transform group-hover:scale-110 group-hover:rotate-6 duration-300'
                     />
                   </div>
 
@@ -64,7 +67,6 @@ const Specialties = () => {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
     </>

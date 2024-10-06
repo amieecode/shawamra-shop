@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import NavBar from "./Components/Home/NavBar";
 import Hero from "./Components/Home/Hero";
 import Quotes from "./Components/Home/Quotes";
-//import Specialties from "./Components/Home/Specialties";
+import Specialties from "./Components/Home/Specialties";
 
 const App = () => {
   useEffect (() => {
@@ -21,6 +21,7 @@ const App = () => {
       <NavBar />
       <Hero />
       <Quotes />
+      <Specialties />
     </div>
   )
 }
