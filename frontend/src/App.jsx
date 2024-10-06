@@ -5,6 +5,7 @@ import NavBar from "./Components/Home/NavBar";
 import Hero from "./Components/Home/Hero";
 import Quotes from "./Components/Home/Quotes";
 import Specialties from "./Components/Home/Specialties";
+import Recommended from "./Components/Home/Recommended";
 
 const App = () => {
   useEffect (() => {
@@ -22,6 +23,7 @@ const App = () => {
       <Hero />
       <Quotes />
       <Specialties />
+      <Recommended />
     </div>
   )
 }

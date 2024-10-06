@@ -33,7 +33,7 @@ const Specialties = () => {
     <>
       <span id="services"></span>
         <div className='py-10 overflow-hidden'>
-          <div className='container'>
+          <div className='container shadow-2xl'>
             {/*Header Title*/}
             <h2 className='font-bold text-2xl sm:text-3xl mb-8'>
               Our Shawarma Specialties
