@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GoPerson } from "react-icons/go";
 import { CgShoppingCart } from "react-icons/cg";
 import { HiMenuAlt1, HiMenuAlt3 } from "react-icons/hi";
+import { SiSaucelabs } from "react-icons/si";
 
 const Menus = [
   {
@@ -39,46 +40,41 @@ const NavBar = () => {
   };
 
   return (
-    <div className='z-10 bg-black text-white'> 
-      <div className='container py-4 md:py-2'>
-        <div className='flex justify-between items-center gap-2 md:gap-4'>
+    <> 
+      <nav className='bg-black text-white'>
+        <div className='container flex items-center justify-between py-6'>
           
           {/*Logo section*/}
-          <div className='flex items-center'>
-            <a href="#" className='text-2xl sm:text-3xl flex justify-center items-center gap-2 tracking-wider font-cursive'>
-              Shawamra
-            </a>
+          <div className='flex items-center text-2xl font-cursive gap-2'>
+            <SiSaucelabs />  
+            <p>Shawamra</p>  
           </div>
 
-          {/*Nav Menu for Desktop*/}
+          {/*Menu Section*/}
           <div className='hidden md:block'>
-            <div>
-              <ul className='flex justify-between items-center gap-6'>
+              <ul className='flex items-center gap-6'>
                 {Menus.map((data, index) => (
                   <li key={index}>
-                    <a href={data.link} className={`inline-block text-xl py-4 px-4 text-white/70 transition-all hover:text-white  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}>
+                    <a href={data.link} className={`inline-block text-xl py-1 px-3 text-white/70 transition-all hover:text-white  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}>
                       {data.name}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
           </div>
 
           {/*Icons*/}
-          <div className='hidden md:block'>
-            <div className='flex items-center gap-6'>
-              <GoPerson className='text-white text-2xl cursor-pointer' />
-              <CgShoppingCart className='text-white text-2xl cursor-pointer' />
-            </div>
+          <div className='flex items-center gap-6'>
+            <button className='text-white text-2xl cursor-pointer'>
+              <GoPerson />
+            </button> 
+            <button className='text-white text-2xl cursor-pointer'>
+              <CgShoppingCart />
+            </button> 
           </div>
           
-          {/*Mobile Icons + Menu Toggle*/}
-          <div className='md:hidden flex items-center gap-6'>
-            {/* Profile and Cart Icons */}
-              <GoPerson className='text-white text-2xl' />
-              <CgShoppingCart className='text-white text-2xl' />
-
+          {/*Mobile Hamburger Menu Section*/}
+          <div className='md:hidden' onClick={() => setShowMenu(!showMenu)}>
               {showMenu ? (
                 <HiMenuAlt1 
                   onClick ={toggleMenu}
@@ -93,10 +89,11 @@ const NavBar = () => {
                 />
               )}
           </div>
-        </div>
+      </div>
+    </nav>
 
         {/*Mobile Nav Menu*/}
-        <div className={`${showMenu ? "block": "hidden"} z-10 h-screen w-full flex-col justify-between px-8 py-12 top-0 left-0 bg-black pt-8 transition-all md:hidden`}>
+        <div className={`${showMenu ? "block": "hidden"} z-10 w-full flex-col justify-between px-4 py-4 top-0 left-0 bg-black transition-all lg:hidden`}>
             <ul className='space-y-2 text-xl'>
               {Menus.map((data, index) => (
                 <li key={index}>
@@ -108,8 +105,8 @@ const NavBar = () => {
             </ul>
         </div>
 
-      </div>
-    </div>
+     
+    </>
   )
 }
 

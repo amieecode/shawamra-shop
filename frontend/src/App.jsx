@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import NavBar from "./Components/Home/NavBar";
-import Hero from "./Components/Home/Hero";
-import Quotes from "./Components/Home/Quotes";
-import Specialties from "./Components/Home/Specialties";
+//import Hero from "./Components/Home/Hero";
+//import Quotes from "./Components/Home/Quotes";
+//import Specialties from "./Components/Home/Specialties";
 
 const App = () => {
   useEffect (() => {
@@ -17,11 +17,8 @@ const App = () => {
   }); 
 
   return(
-    <div>
+    <div className="overflow-x-hidden">
       <NavBar />
-      <Hero />
-      <Quotes />
-      <Specialties />
     </div>
   )
 }
