@@ -39,12 +39,12 @@ const NavBar = () => {
 
   return (
     <> 
-      <nav className='bg-black text-white'>
+      <nav className='bg-black text-white fixed top-0 shadow-md z-10 w-full'>
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className='container flex items-center justify-between py-8'
+          className='container mx-auto flex items-center justify-between py-6 px-6 lg:py-8'
         >
           {/*Logo section*/}
           <div className='flex items-center text-2xl font-cursive'>

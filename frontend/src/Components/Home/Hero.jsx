@@ -31,11 +31,11 @@ const Hero = () => {
                 </div>
               </div>
               {/*Image Section*/}
-              <div data-aos="zoom-in" className='order-1 sm:order-2'>
+              <div data-aos="zoom-in" className='min-h-[450px] flex justify-center items-center relative order-1 sm:order-2'>
                 <img 
                   src={HeroImg} 
                   alt=''
-                  className='w-[300px] sm:w-[450px] m-auto spin cursor-pointer'
+                  className='w-[350px] sm:w-[450px] m-auto spin cursor-pointer'
                 />
               </div>
           </div>
