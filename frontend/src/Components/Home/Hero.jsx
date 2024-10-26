@@ -3,7 +3,7 @@ import HeroImg from '../../assets/hero.png';
 
 const Hero = () => {
   return (
-    <div className='min-h-[550px] sm:min-h-[600px] bg-black text-white flex justify-center items-center'>
+    <div className='min-h-[550px] sm:min-h-[600px] bg-black text-white flex justify-center items-center mt-8'>
        <div className='container pb-8 sm:pb-0'>
           <div className='grid grid-cols-1 sm:grid-cols-2'>
             {/*Text content section*/}
@@ -35,7 +35,7 @@ const Hero = () => {
                 <img 
                   src={HeroImg} 
                   alt=''
-                  className='w-[350px] sm:w-[450px] m-auto spin cursor-pointer'
+                  className='w-[400px] sm:w-[450px] m-auto  cursor-pointer'
                 />
               </div>
           </div>

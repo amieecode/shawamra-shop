@@ -35,7 +35,7 @@ const Specialties = () => {
         <div className='py-10 overflow-hidden'>
           <div className='container shadow-2xl'>
             {/*Header Title*/}
-            <h2 className='font-bold text-2xl sm:text-3xl mb-8'>
+            <h2 className='font-bold text-3xl sm:text-3xl mb-10'>
               Our Shawarma Specialties
             </h2>
 
@@ -54,7 +54,7 @@ const Specialties = () => {
                     <img 
                       src={data.img}
                       alt={data.name}
-                      className='max-w-[180px] items-center mx-auto transform group-hover:scale-110 group-hover:rotate-6 duration-300'
+                      className='max-w-[180px] items-center mx-auto spin  cursor-pointer transform group-hover:scale-110 group-hover:rotate-6 duration-300'
                     />
                   </div>
 

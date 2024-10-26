@@ -6,6 +6,7 @@ import Hero from "./Components/Home/Hero";
 import Quotes from "./Components/Home/Quotes";
 import Specialties from "./Components/Home/Specialties";
 import Recommended from "./Components/Home/Recommended";
+import Testimonials from "./Components/Home/Testimonial";
 
 const App = () => {
   useEffect (() => {
@@ -24,6 +25,7 @@ const App = () => {
       <Quotes />
       <Specialties />
       <Recommended />
+      <Testimonials />
     </div>
   )
 }
