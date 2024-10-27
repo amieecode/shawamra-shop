@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Leaf from "../../assets/green-leaf.png";
+import { FaStar } from 'react-icons/fa'; 
 
 const TestimonialData =[
     {
@@ -9,6 +11,7 @@ const TestimonialData =[
         name:"Stan Smith",
         text: "The beef shawarma wrap was absolutely delicious! The flavors were incredible, and it was the perfect size for a quick lunch. I'll definitely be back for more!",
         img: "https://picsum.photos/101/101",
+        rating: 4,
     },
 
     {
@@ -16,6 +19,7 @@ const TestimonialData =[
         name: "Sabir ali",
         text: "The service was quick, and the staff was super friendly! I enjoyed my meal and couldn't believe how affordable it was for such high quality. Will be bringing my friends next time!",
         img: "https://picsum.photos/102/102",
+        rating: 5,
     },
 
     {
@@ -23,6 +27,7 @@ const TestimonialData =[
         name: "James K",
         text: "I’ve tried shawarma from many places, but this one is by far the best! The spices and the freshness of the ingredients really make a difference. Highly recommend!",
         img: "https://picsum.photos/104/104",
+        rating: 3,
     },
 
     {
@@ -30,6 +35,7 @@ const TestimonialData =[
         name: "Fatima A.",
         text: "I love the variety of options available! The chicken shawarma was flavorful and juicy, and the sauces added the perfect touch. A must-try for shawarma lovers!",
         img: "https://picsum.photos/102/102",
+        rating: 4,
     },
 
     {
@@ -37,6 +43,7 @@ const TestimonialData =[
         name: "Olivia ali",
         text: "Absolutely fantastic! The beef shawarma had the perfect amount of spices, and the pita was soft and warm. It's the best I've had in town!",
         img: "https://picsum.photos/101/101",
+        rating: 5,
     },
 
     {
@@ -44,9 +51,12 @@ const TestimonialData =[
         name: "Dilshed David",
         text: "Every bite of the shawarma is bursting with flavor! I can’t get enough of the garlic sauce. A great place for a satisfying meal!",
         img: "https://picsum.photos/101/101",
+        rating: 3,
     },
 ]
 const Testimonial = () => {
+    const [activeSlide, setActiveSlide] = useState(0); // Track active slide index
+
     const settings = {
         dots: true,
         arrows: false,
@@ -58,8 +68,11 @@ const Testimonial = () => {
         cssEase: "linear",
         pauseOnHover: true,
         pauseOnFocus: true,
+        beforeChange: (current, next) => setActiveSlide(next), // Update activeSlide before each transition
         customPaging: (i) => (
-            <div className={`w-4 h-4 rounded-full ${i === 0 ? 'bg-white' : 'bg-gray-500'}`}></div>
+            <div
+                className={`w-3 h-3 rounded-full ${i === activeSlide ? 'bg-white' : 'bg-gray-500'}`} // White for active, gray for inactive
+            ></div>
         ),
         responsive: [
             {
@@ -90,7 +103,7 @@ const Testimonial = () => {
         ]
     };
   return (
-    <div className='py-14 mb-10 bg-[#0d0d0d] text-white overflow-hidden'>
+    <div className='py-14 mb-10 bg-[#0d0d0d] text-white overflow-hidden relative'>
       <div className='container'>
         {/*Header Section*/}
         <div data-aos='fade-up' className='text-center mb-10'>
@@ -120,6 +133,15 @@ const Testimonial = () => {
                                     <p className='text-xs text-white'>{data.text}</p>
                                     <h1 className='text-xl text-gray-400 font-bold font-cursive'>{data.name}</h1>
                                 </div>
+                                {/*Rating system*/}
+                                <div className='flex'>
+                                    {Array(5).fill().map((_, index) => ( 
+                                        <FaStar 
+                                            key={index}
+                                            className={`w-4 h-4 ${index < data.rating ? 'text-yellow-400' : 'text-gray-400'}`}
+                                        />
+                                    ))}
+                                </div>
                             </div>
                             <p className='text-gray-600 text-9xl font-serif absolute top-0 right-0'>,,</p>
                         </div>
@@ -128,6 +150,12 @@ const Testimonial = () => {
                 )}
             </Slider>
         </div>
+
+        {/*leaf*/}
+        <div className='w-[100px] h-[100px] md:w-[250px] md:h-[250px] absolute -top-5 md:-top-10 -right-28 pointer-events-none'>
+          <img src={Leaf} alt="" className='transform rotate-5' />
+        </div>
+
       </div>
     </div>
   )

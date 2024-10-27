@@ -32,7 +32,7 @@ const Recommended = () => {
         </div>
 
         {/*leaf*/}
-        <div className='w-[150px] h-[150px] md:w-[300px] md:h-[300px] absolute -top-8 md:-top-16 right-0 pointer-events-none'>
+        <div className='w-[100px] h-[100px] md:w-[300px] md:h-[300px] absolute -top-8 md:-top-16 right-0 pointer-events-none'>
           <img src={Leaf} alt="" className='transform rotate-[140deg]' />
         </div>
       </div>

@@ -59,7 +59,7 @@ const NavBar = () => {
               <ul className='flex items-center gap-4'>
                 {Menus.map((data, index) => (
                   <li key={index}>
-                    <a href={data.link} className={`inline-block text-xl py-1 px-3 text-white/70 transition-all hover:text-white  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}>
+                    <a href={data.link} className={`inline-block text-xl py-1 px-3 text-white/70 transition-all hover:text-green-400  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}>
                       {data.name}
                     </a>
                   </li>

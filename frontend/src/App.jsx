@@ -7,6 +7,7 @@ import Quotes from "./Components/Home/Quotes";
 import Specialties from "./Components/Home/Specialties";
 import Recommended from "./Components/Home/Recommended";
 import Testimonials from "./Components/Home/Testimonial";
+import Footer from "./Components/Home/Footer";
 
 const App = () => {
   useEffect (() => {
@@ -26,6 +27,7 @@ const App = () => {
       <Specialties />
       <Recommended />
       <Testimonials />
+      <Footer />
     </div>
   )
 }
