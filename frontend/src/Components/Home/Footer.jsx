@@ -2,6 +2,7 @@ import React from 'react'
 import { FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa';
 import { FaLocationDot, FaPhone } from "react-icons/fa6";
 import { MdMarkEmailUnread } from 'react-icons/md';
+import Map from './map';
 
 const FooterLinks =[
     {
@@ -63,7 +64,7 @@ const Footer = () => {
       </div>
       <span className="block w-full border-[1px] border-slate-800"></span>
         
-      <section className='flex flex-col lg:flex-row justify-center w-full'>
+      <section className='flex flex-col lg:flex-row justify-center px-6 w-full overflow-hidden'>
         <section className='flex flex-col justify-center my-[2rem] w-full lg:w-[20%] h-[20rem]'>
           {/*Phone Number*/}
           <div data-aos='zoom-in' data-aos-duration='1000' className='flex w-[90%] p-4 bg-white rounded-[10px] space-x-6'>
@@ -89,7 +90,7 @@ const Footer = () => {
 
           {/*Location*/}
           <div data-aos='zoom-in' data-aos-duration='1000' className='flex w-[90%] p-4 bg-white rounded-[10px] space-x-6'>
-            <span className='w-20 h-12 flex justify-center items-center rounded-full bg-slate-200'>
+            <span className='lg:w-20 w-12 h-12 flex justify-center items-center rounded-full bg-slate-200'>
               <FaLocationDot className='text-green-600 block' />
             </span>
             <span className=' block'>
@@ -97,10 +98,12 @@ const Footer = () => {
               <h2 className='text-slate-900 text-[14px]'>498 Queen St W, Toronto, ON M6J 1E3, Canada</h2>
             </span>
           </div>
-
-          {/*Map Section*/}
-
         </section>
+        
+        {/*Map Section*/}
+        <div data-aos='fade-up' data-aos-duration='1000' className='lg:w-[45%] lg:my-[2rem] h-[19rem]'>
+          <Map />
+        </div>
       </section>
 
       {/*Reserved section*/}

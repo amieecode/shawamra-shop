@@ -19,7 +19,7 @@ const ResponsiveMenu = ({ open }) => {
                 animate= {{ opacity: 1, y: 0 }}
                 transition={{ duration:0.3 }}
                 exit={{ opacity: 0, y: -100 }}
-                className="absolute top-20 left-0 w-full h-screen z-20"
+                className="fixed top-20 left-0 w-full h-screen z-[99]"
             
             >
                 <div className='text-xl bg-black/90 text-white py-10 m-6 rounded-3xl'>
