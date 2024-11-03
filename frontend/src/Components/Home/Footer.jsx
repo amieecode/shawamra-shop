@@ -95,7 +95,7 @@ const Footer = () => {
             </span>
             <span className=' block'>
               <h2 className='font-semibold text-slate-900 capitalize'>Location</h2>
-              <h2 className='text-slate-900 text-[14px]'>498 Queen St W, Toronto, ON M6J 1E3, Canada</h2>
+              <h2 className='text-slate-900 text-[14px]'>496 Queen St W, Toronto, ON M6J 1E3, Canada</h2>
             </span>
           </div>
         </section>
