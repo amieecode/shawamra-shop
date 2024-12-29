@@ -5,32 +5,33 @@ import { SiSaucelabs } from "react-icons/si";
 import { MdMenu } from "react-icons/md"
 import ResponsiveMenu from './ResponsiveMenu';
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Menus = [
   {
     id: 1,
     name: "Home",
-    link: "/#",
+    Link: "/#",
   },
   {
     id: 2,
     name: "About Us",
-    link: "/#about-us",
+    Link: "/#about-us",
   },
   {
     id: 3,
     name: "Services",
-    link: "/#services",
+    Link: "/#services",
   },
   {
     id: 4,
     name: "Blog",
-    link: "/#blog",
+    Link: "/#blog",
   },
   {
     id: 5,
     name: "Contact Us",
-    link: "/#contact-us",
+    Link: "/contact",
   },
 ]
 const NavBar = () => {
