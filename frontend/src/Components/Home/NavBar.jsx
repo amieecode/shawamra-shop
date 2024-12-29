@@ -11,27 +11,27 @@ const Menus = [
   {
     id: 1,
     name: "Home",
-    Link: "/#",
+    link: "/#",
   },
   {
     id: 2,
     name: "About Us",
-    Link: "/#about-us",
+    link: "/#about-us",
   },
   {
     id: 3,
     name: "Services",
-    Link: "/#services",
+    link: "/#services",
   },
   {
     id: 4,
     name: "Blog",
-    Link: "/#blog",
+    link: "/#blog",
   },
   {
     id: 5,
     name: "Contact Us",
-    Link: "/contact",
+    link: "/contact",
   },
 ]
 const NavBar = () => {
@@ -49,10 +49,10 @@ const NavBar = () => {
         >
           {/*Logo section*/}
           <div className='flex items-center text-2xl font-cursive'>
-            <a href='#' className='flex cursor-pointer gap-2'>
+            <Link href='#' className='flex cursor-pointer gap-2'>
               <SiSaucelabs />
               Shawamra
-            </a>
+            </Link>
           </div>
 
           {/*Menu Section*/}
@@ -60,9 +60,12 @@ const NavBar = () => {
               <ul className='flex items-center gap-4'>
                 {Menus.map((data, index) => (
                   <li key={index}>
-                    <a href={data.link} className={`inline-block text-xl py-1 px-3 text-white/70 transition-all hover:text-green-400  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}>
+                    <Link 
+                      href={data.link} 
+                      className={`inline-block text-xl py-1 px-3 text-white/70 transition-all hover:text-green-400  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}
+                    >
                       {data.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
