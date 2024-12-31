@@ -29,7 +29,8 @@ const FooterLinks =[
 
 const Footer = () => {
   return (
-    <div className=''>
+    <>
+     <span id="contact"></span>
       <div data-aos='fade-up' className='container mx-auto text-white px-6 py-6 lg:py-8 flex flex-col lg:flex-row lg:items-center lg:justify-between overflow-hidden'>
         {/*Brand Name*/}
           <div className='font-cursive text-2xl sm:text-3xl font-semibold mb-8 lg:mb-0 lg:text-center text-left'>
@@ -111,7 +112,7 @@ const Footer = () => {
         <p>&copy; 2024 Shawarma. All Rights Reserved.</p>
       </section>
      
-    </div>
+    </>
 
   )
 }

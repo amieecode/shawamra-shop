@@ -5,7 +5,6 @@ import { SiSaucelabs } from "react-icons/si";
 import { MdMenu } from "react-icons/md"
 import ResponsiveMenu from './ResponsiveMenu';
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 const Menus = [
   {
@@ -31,7 +30,7 @@ const Menus = [
   {
     id: 5,
     name: "Contact Us",
-    link: "/contact",
+    link: "/#contact",
   },
 ]
 const NavBar = () => {
@@ -49,10 +48,10 @@ const NavBar = () => {
         >
           {/*Logo section*/}
           <div className='flex items-center text-2xl font-cursive'>
-            <Link href='#' className='flex cursor-pointer gap-2'>
+            <a href="/" className='flex cursor-pointer gap-2'>
               <SiSaucelabs />
               Shawamra
-            </Link>
+            </a>
           </div>
 
           {/*Menu Section*/}
@@ -60,12 +59,12 @@ const NavBar = () => {
               <ul className='flex items-center gap-4'>
                 {Menus.map((data, index) => (
                   <li key={index}>
-                    <Link 
+                    <a 
                       href={data.link} 
                       className={`inline-block text-xl py-1 px-3 text-white/70 transition-all hover:text-green-400  ${data.name === activeMenu ? 'underline underline-offset-[10px]' : 'hover:underline hover:underline-offset-[10px]'} `}
                     >
                       {data.name}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

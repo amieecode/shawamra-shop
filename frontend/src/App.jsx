@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import NavBar from "./Components/Home/NavBar";
@@ -9,7 +8,6 @@ import Specialties from "./Components/Home/Specialties";
 import Recommended from "./Components/Home/Recommended";
 import Testimonials from "./Components/Home/Testimonial";
 import Footer from "./Components/Home/Footer";
-import Contact from "./Components/Home/contact";
 
 const App = () => {
   useEffect (() => {
@@ -22,30 +20,15 @@ const App = () => {
   }); 
 
   return(
-    <Router>
-      <div className="overflow-x-hidden bg-black text-white">
+     <div className="overflow-x-hidden bg-black text-white">
         <NavBar />
-        <Routes>
-          {/* Home Route */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <Quotes />
-                <Specialties />
-                <Recommended />
-                <Testimonials />
-              </>
-            }
-          />
-
-          {/* Contact Page Route */}
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Hero />
+        <Quotes />
+        <Specialties />
+        <Recommended />
+        <Testimonials />
         <Footer />
       </div>
-    </Router>
   )
 }
 
