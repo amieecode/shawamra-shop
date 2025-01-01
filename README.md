@@ -17,3 +17,7 @@ This project is a shawarma shop built with React and tailwindcss. It features a 
 - AOS (Animate on scroll)
 - Slick-carousel
 - Framer motion
+
+
+Here is the sample 
+![Template](images/logo.png)
