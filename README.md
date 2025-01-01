@@ -19,5 +19,6 @@ This project is a shawarma shop built with React and tailwindcss. It features a 
 - Framer motion
 
 
-Here is the sample 
-![Template](images/logo.png)
+## Here is the sample 
+
+![Template](src/assets/template.jpg)
