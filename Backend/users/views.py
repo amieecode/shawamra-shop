@@ -14,6 +14,10 @@ class RegisterUser(APIView):
         password = make_password(request.data.get('password'))
 
         # create a new user and save it to the database
-        user = User.objects.create(username=username, email=email, password=password)
+        user = User.objects.create(
+            username=username, 
+            email=email, 
+            password=password
+        )
         
         return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
