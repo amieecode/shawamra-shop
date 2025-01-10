@@ -1,23 +1,34 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework.views import APIView
-from rest_framework.response import Response 
+from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.hashers import make_password
-from django.shortcuts import render
+from .serializer import UserSerializers, LoginSerializers
 
 # Create your views here.
 class RegisterUser(APIView):
     def post (self, request):
-        # Get the data from the frontend (username, email, password)
-        username = request.data.get('username')
-        email = request.data.get('email')
-        password = make_password(request.data.get('password'))
+        # Use the serializers to validate and process data
+        serializers = UserSerializers(data=request.data)
 
-        # create a new user and save it to the database
-        user = User.objects.create(
-            username=username, 
-            email=email, 
-            password=password
-        )
+        # Check if the data is valid
+        if serializers.is_valid():
+            # Save the new user
+            serializers.save()
+            return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
         
-        return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
+        # Return validated errors
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginUser(APIView):
+    def post (self, request):
+        serializers = LoginSerializers(data=request.data)
+        if serializers.is_valid():
+            # Authenticate  the user 
+            user = authenticate (
+                username = serializers.validated_data['username'],
+                password = serializers.validated_data['password']
+            )
+            if user:
+                return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+            return Response({"error": "Invalid credential"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
