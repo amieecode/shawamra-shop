@@ -9,7 +9,7 @@ class ProductList(APIView):
     def get(self, request):
         # retrieve all products  
         products = Product.objects.all()
-        serializer = productSerializer(products, many=True)
+        serializer =ProductSerializer(products, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -27,8 +27,8 @@ class ProductDetail(APIView):
         try:
             product = Product.objects.get(pk=pk)
         except Product.DoesNotExist:
-            return Response({"ERROR": "Product not found"}, status=status)
-        serializer_class = productSerializer(product)
+            return Response({"ERROR": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer_class = ProductSerializer(product)
         return Response(serializer.data)
 
     def put(self, request):
