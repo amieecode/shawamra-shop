@@ -5,7 +5,7 @@ from .models import Product
 from .serializer import ProductSerializer
 
 # Create your views here.
-class ProductList(APIView):
+class ProductListView(APIView):
     def get(self, request):
         # retrieve all products  
         products = Product.objects.all()
@@ -21,7 +21,7 @@ class ProductList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProductDetail(APIView):
+class ProductDetailView(APIView):
     def get(self, request, pk):
         # Retrieve a single product by ID
         try:

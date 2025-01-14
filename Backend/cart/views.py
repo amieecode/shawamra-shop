@@ -25,7 +25,7 @@ class CartView(APIView):
 
         cart, created = Cart.objects.get_or_created(user=request.user)
         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        cart_item.quantity = cart_item.quantity + int(quantity)
+        cart_item.quantity += int(quantity)
         cart_item.save()
 
         serializer = CartSerializer(cart)
