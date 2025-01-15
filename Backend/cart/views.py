@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response 
 from rest_framework import status
@@ -7,13 +8,23 @@ from .serializer import CartSerializer
 
 # Create your views here.
 class CartView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
+        # Check if user is authenticated
+        if not request.user.is_authenticated:
+            return Response({"error": "Authentication required"}, status=status.HTTP_403_FORBIDDEN)
+
         # Retrieve user's cart
         cart, created = Cart.objects.get_or_create(user=request.user)
         serializer = CartSerializer(cart)
         return Response(serializer.data)
 
     def post(self, request):
+         # Check if user is authenticated
+        if not request.user.is_authenticated:
+            return Response({"error": "Authentication required"}, status=status.HTTP_403_FORBIDDEN)
+            
         # Add product to cart
         product_id = request.data.get('product_id')
         quantity = request.data.get('quantity', 1)
@@ -32,6 +43,10 @@ class CartView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request):
+         # Check if user is authenticated
+        if not request.user.is_authenticated:
+            return Response({"error": "Authentication required"}, status=status.HTTP_403_FORBIDDEN)
+            
         # Remove product from cart
         product_id = request.data.get('product_id')
 
