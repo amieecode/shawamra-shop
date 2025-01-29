@@ -109,7 +109,7 @@ const Footer = () => {
 
       {/*Reserved section*/}
       <section className='bg-gray-600/30 text-white flex justify-center mt-8 lg:mt-0 py-4'>
-        <p>&copy; 2024 Shawarma. All Rights Reserved.</p>
+        <p>&copy; 2025 Shawarma. All Rights Reserved.</p>
       </section>
      
     </>
