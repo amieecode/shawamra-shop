@@ -23,3 +23,6 @@ const cartSlice = createSlice({
         },
     },
 });
+
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;
