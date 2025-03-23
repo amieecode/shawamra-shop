@@ -4,27 +4,19 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Cart, CartItem
 from products.models import Product
-from .serializer import CartSerializer
+from .serializers import CartSerializer
 
 # Create your views here.
 class CartView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # Check if user is authenticated
-        if not request.user.is_authenticated:
-            return Response({"error": "Authentication required"}, status=status.HTTP_403_FORBIDDEN)
-
         # Retrieve user's cart
         cart, created = Cart.objects.get_or_create(user=request.user)
         serializer = CartSerializer(cart)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-         # Check if user is authenticated
-        if not request.user.is_authenticated:
-            return Response({"error": "Authentication required"}, status=status.HTTP_403_FORBIDDEN)
-            
         # Add product to cart
         product_id = request.data.get('product_id')
         quantity = request.data.get('quantity', 1)
@@ -34,19 +26,19 @@ class CartView(APIView):
         except Product.DoesNotExist:
             return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
-        cart, created = Cart.objects.get_or_created(user=request.user)
+        cart, created = Cart.objects.get_or_create(user=request.user)
         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        cart_item.quantity += int(quantity)
+
+        if created:
+            cart_item.quantity = quantity # Set the quantity for new item
+        else :
+            cart_item.quantity += int(quantity) # Increase quantity if it exit
         cart_item.save()
 
         serializer = CartSerializer(cart)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def delete(self, request):
-         # Check if user is authenticated
-        if not request.user.is_authenticated:
-            return Response({"error": "Authentication required"}, status=status.HTTP_403_FORBIDDEN)
-            
+    def delete(self, request):   
         # Remove product from cart
         product_id = request.data.get('product_id')
 
