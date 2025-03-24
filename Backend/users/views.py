@@ -1,34 +1,68 @@
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UserSerializers, LoginSerializers
 
 # Create your views here.
 class RegisterUser(APIView):
     def post (self, request):
-        # Use the serializers to validate and process data
-        serializers = UserSerializers(data=request.data)
-
-        # Check if the data is valid
-        if serializers.is_valid():
-            # Save the new user
-            serializers.save()
-            return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
+        username = request.data.get('username')
+        email = request.data.get('email') 
+        password = request.data.get('password')
         
-        # Return validated errors
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        if not username or not email or not password:
+            return Response({"error": "username, email and password required"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if User.objects.filter(username=username).exists():
+            return Response({"error": "Username already exists"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if User.objects.filter(email=email).exists():
+            return Response({"error": "Email already exists"}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.create_user(username=username, password=password)
+        user.email = email
+        user.save()
+
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            "message": "User registered successfully", 
+            "user": {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email
+            },
+            "token": token.key
+        }, status=status.HTTP_201_CREATED)
+
 
 class LoginUser(APIView):
     def post (self, request):
-        serializers = LoginSerializers(data=request.data)
-        if serializers.is_valid():
-            # Authenticate  the user 
-            user = authenticate (
-                username = serializers.validated_data['username'],
-                password = serializers.validated_data['password']
-            )
-            if user:
-                return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
-            return Response({"error": "Invalid credential"}, status=status.HTTP_401_UNAUTHORIZED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({
+                "message": "Login successful",
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                    "email": user.email
+                },
+                "token": token.key
+            }, status=status.HTTP_200_OK)
+        
+        return Response({"error": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+class LogoutUser(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request.auth.delete()
+        return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
