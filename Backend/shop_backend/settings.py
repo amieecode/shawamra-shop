@@ -158,3 +158,10 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # This prints 
 # EMAIL_HOST_USER = 'your-email@gmail.com'
 # EMAIL_HOST_PASSWORD = 'your-email-password'
 
+# Payment gateway
+import stripe
+
+STRIPE_SECRET_KEY = "your_secret_key"
+STRIPE_PUBLIC_KEY = "your_public_key"
+
+stripe.api_key = STRIPE_SECRET_KEY
