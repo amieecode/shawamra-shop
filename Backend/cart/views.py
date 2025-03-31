@@ -2,7 +2,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response 
 from rest_framework import status
-from .models import Cart, Product
+from products.models import Product
+from cart.models import Cart
 from .serializers import CartSerializer
 
 # Create your views here.
@@ -21,7 +22,7 @@ class AddToCartView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        product_id = Product.data.get('product_id')
+        product_id = request.data.get('product_id')
         quantity = int(request.data.get('quantity', 1))
 
         try:
@@ -35,8 +36,8 @@ class AddToCartView(APIView):
         else:
             cart_item.quantity = quantity
 
-        Cart.save()
-        return Response({"message", "product add to cart"}, status=status.HTTP_201_CREATED)
+        cart_item.save()
+        return Response({"message", "Product add to cart"}, status=status.HTTP_201_CREATED)
 
 class UpdateCartView(APIView):
     # update the quantity of the cart
@@ -44,7 +45,7 @@ class UpdateCartView(APIView):
 
     def put(self, request, pk):
         try:
-            cart_item = Cart.objects.get(pk=pk, user=User.request)
+            cart_item = Cart.objects.get(pk=pk, user=request.user)
         except Cart.DoesNotExist:
             return Response({"error": "Cart item not found"}, status=status.HTTP_404_NOT_FOUND)
 

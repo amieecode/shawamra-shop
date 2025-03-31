@@ -22,10 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('users.urls')),
-    path('products/', include('products.urls')),
-    path('orders/', include('orders.urls')),
-    path('cart/', include('cart.urls')),
-    path('payment/', include('payment.urls')),
+    path('api/products/', include('products.urls')),
+    path('api/orders/', include('orders.urls')),
+    path('api/cart/', include('cart.urls')),
+    path('api/payment/', include('payment.urls')),
 ]
 
 if settings.DEBUG:
