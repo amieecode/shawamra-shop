@@ -44,6 +44,7 @@ class UpdateCartView(APIView):
     permission_classes = [IsAuthenticated]
 
     def put(self, request, pk):
+    
         try:
             cart_item = Cart.objects.get(pk=pk, user=request.user)
         except Cart.DoesNotExist:
