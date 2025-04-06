@@ -19,14 +19,17 @@ def create_checkout_session(request):
         except Order.DoesNotExist:
             return JsonResponse({"error": "Order not found"}, status=404)
 
+        # 🔥 Calculate total price from items
+        total = sum(item.quantity * item.price for item in order.items.all())
+
         # Create Stripe checkout session
         session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[{
                 "price_data": {
                     "currency": "usd",
-                    "product_data": {"name": "Shawarma Order"},  # Give a valid name for the product
-                    "unit_amount": int(order.total_price * 100),  # Convert to cents
+                    "product_data": {"name": "Shawarma Order"},
+                    "unit_amount": int(total * 100),  # Convert to cents
                 },
                 "quantity": 1,
             }],
@@ -39,7 +42,7 @@ def create_checkout_session(request):
         payment = Payment.objects.create(
             user=order.user,
             order=order,
-            amount=order.total_price,
+            amount=total,
             stripe_payment_id=session.id,
             status="pending"
         )
