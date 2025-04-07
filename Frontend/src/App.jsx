@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import NavBar from "./Components/Home/NavBar";
-import Hero from "./Components/Home/Hero";
-import Quotes from "./Components/Home/Quotes";
-import Specialties from "./Components/Home/Specialties";
-import Recommended from "./Components/Home/Recommended";
-import Testimonials from "./Components/Home/Testimonial";
-import Footer from "./Components/Home/Footer";
+import NavBar from "./Components/Layout/NavBar";
+import Hero from "./Components/Layout/Hero";
+import Quotes from "./Components/Layout/Quotes";
+import Specialties from "./Components/Layout/Specialties";
+import Recommended from "./Components/Layout/Recommended";
+import Testimonials from "./Components/Layout/Testimonial";
+import Footer from "./Components/Layout/Footer";
 
 const App = () => {
   useEffect (() => {
