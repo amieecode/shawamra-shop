@@ -34,6 +34,12 @@ SECRET_KEY = 'django-insecure-#)^45($@lfw6aj2#mwqh#b84!&qej*85z0j+a7yby80efi++_e
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ALLOW_ALL_ORIGINS = True
+
+#CORS_ALLOWED_ORIGINS = [
+   # 'http://localhost:3000',  # React development server
+   # 'https://yourdomain.com',  # Your deployed frontend
+#]
 
 
 # Application definition
@@ -48,6 +54,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'users',
     'products',
     'orders',
@@ -71,6 +78,7 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

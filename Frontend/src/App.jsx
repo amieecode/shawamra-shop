@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import NavBar from "./Components/Layout/NavBar";
-import Hero from "./Components/Layout/Hero";
-import Quotes from "./Components/Layout/Quotes";
-import Specialties from "./Components/Layout/Specialties";
-import Recommended from "./Components/Layout/Recommended";
-import Testimonials from "./Components/Layout/Testimonial";
-import Footer from "./Components/Layout/Footer";
+import Home from "./pages/Home";
+import Register from "./Components/Auth/Register";
+import Login from "./Components/Auth/Login";
 
 const App = () => {
   useEffect (() => {
@@ -20,15 +17,14 @@ const App = () => {
   }); 
 
   return(
-     <div className="overflow-x-hidden bg-black text-white">
-        <NavBar />
-        <Hero />
-        <Quotes />
-        <Specialties />
-        <Recommended />
-        <Testimonials />
-        <Footer />
-      </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+     
   )
 }
 
