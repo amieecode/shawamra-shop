@@ -36,10 +36,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 CORS_ALLOW_ALL_ORIGINS = True
 
-#CORS_ALLOWED_ORIGINS = [
-   # 'http://localhost:3000',  # React development server
-   # 'https://yourdomain.com',  # Your deployed frontend
-#]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # React development server
+    #'https://yourdomain.com',  # Your deployed frontend
+]
 
 
 # Application definition

@@ -19,17 +19,23 @@ const Register = () => {
     };
 
     const handleSubmit = async (e) => {
-       e.preventDefault();
-       try {
-        const data = await registerUser(formData);
-        localStorage.setItem("token", data.token);
-        setError("");
-        navigate("/login");
-       } catch (err) {
-            console.error(err);
-            setError(err.response?.data?.detail || "Something went wrong. Please check your inputs.");
-       } 
+        e.preventDefault();
+        try {
+            const data = await registerUser(formData);
+            console.log("Registration Response:", data);  // 👈 Add this line
+    
+            if (data.token) {
+                localStorage.setItem("token", data.token); 
+                navigate("/login");
+            } else {
+                setError("Failed to retrieve token. Try again.");
+            }
+        } catch (err) {
+            console.error("Registration Error:", err.response?.data || err.message);
+            setError("Something went wrong. Please check your inputs.");
+        }
     };
+    
 
     return (
       <div className='min-h-screen flex items-center justify-center bg-gray-100 px-4'>

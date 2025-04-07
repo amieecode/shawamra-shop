@@ -18,7 +18,7 @@ def register_user(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
-        token, _ = Token.objects.get_or_create(user=user)
+        token, created = Token.objects.get_or_create(user=user)
         return Response({"token": token.key, "user": serializer.data})
     return Response(serializer.errors, status=400) 
 
@@ -28,7 +28,7 @@ def register_user(request):
 def login_user(request):
     email = request.data.get('email', '')
     password = request.data.get('password')
-    user = authenticate(email=email, password=password)
+    user = authenticate(request,username=email, password=password)
     if user:
         token, _ = Token.objects.get_or_create(user=user)
         return Response({"token": token.key})
