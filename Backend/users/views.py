@@ -26,9 +26,9 @@ def register_user(request):
 @api_view(['POST'])
 @permission_classes([])
 def login_user(request):
-    email = request.data.get('email', '')
+    username = request.data.get('username', '').lower()
     password = request.data.get('password')
-    user = authenticate(request,username=email, password=password)
+    user = authenticate(username=username, password=password)
     if user:
         token, _ = Token.objects.get_or_create(user=user)
         return Response({"token": token.key})

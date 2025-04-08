@@ -22,18 +22,18 @@ const Register = () => {
         e.preventDefault();
         try {
             const data = await registerUser(formData);
-            console.log("Registration Response:", data);  // 👈 Add this line
-    
-            if (data.token) {
-                localStorage.setItem("token", data.token); 
+            const token = data.token 
+
+            if (token) {
+                localStorage.setItem("token", token); 
                 navigate("/login");
             } else {
                 setError("Failed to retrieve token. Try again.");
             }
         } catch (err) {
-            console.error("Registration Error:", err.response?.data || err.message);
-            setError("Something went wrong. Please check your inputs.");
-        }
+          console.error(err.response?.data || err.message);
+          setError(err.response?.data?.error || "Something went wrong. Please check your inputs.");
+      }
     };
     
 
