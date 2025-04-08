@@ -21,7 +21,7 @@ export const registerUser = async (userData) => {
 
 export const loginUser = async (credential) => {
     const response = await api.post("/auth/login/", credential, {
-        headers: { 'Skip-Auth': true }, // ✅ this skips adding Authorization header
+        headers: { 'Skip-Auth': true }, // this skips adding Authorization header
     });
     return response.data;
 };

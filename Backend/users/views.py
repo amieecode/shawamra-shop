@@ -19,14 +19,16 @@ def register_user(request):
     if serializer.is_valid():
         user = serializer.save()
         token, created = Token.objects.get_or_create(user=user)
+        print(f"User created: {user.username}")  # Add logging
         return Response({"token": token.key, "user": serializer.data})
-    return Response(serializer.errors, status=400) 
+    print(f"Registration errors: {serializer.errors}")  # Add logging
+    return Response(serializer.errors, status=400)
 
 
 @api_view(['POST'])
 @permission_classes([])
 def login_user(request):
-    username = request.data.get('username', '').lower()
+    username = request.data.get('username', '').lower()  # Ensure case insensitivity
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
     if user:
