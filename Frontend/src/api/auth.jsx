@@ -3,7 +3,8 @@ import api from "../axios";
 
 api.interceptors.request.use((config) =>{
     const token = localStorage.getItem("token");
-    if (token) {
+
+    if (token && !config.headers['Skip-Auth']) {
         config.headers.Authorization = `Token ${token}`;
     }
     return config;
@@ -11,13 +12,17 @@ api.interceptors.request.use((config) =>{
 
 
 // API calls
-export const registerUser = async(userData) => {
-    const response = await api.post("/auth/register/", userData);
+export const registerUser = async (userData) => {
+    const response = await api.post("/auth/register/", userData, {
+        headers: { 'Skip-Auth': true },
+    });
     return response.data;
 };
 
 export const loginUser = async (credential) => {
-    const response  = await api.post("/auth/login/", credential);
+    const response = await api.post("/auth/login/", credential, {
+        headers: { 'Skip-Auth': true }, // ✅ this skips adding Authorization header
+    });
     return response.data;
 };
 

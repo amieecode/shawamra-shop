@@ -7,7 +7,7 @@ import { FiArrowLeft } from "react-icons/fi";
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -25,6 +25,7 @@ const Login = () => {
       setError("");
       navigate("/");
     } catch (err) {
+      console.error("Login error:", err);
       setError("Invalid credentials. Please try again.");
     }
   };

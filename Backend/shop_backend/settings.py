@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
-
+from corsheaders.defaults import default_headers
 
 # pqyment gateway
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
@@ -34,13 +34,18 @@ SECRET_KEY = 'django-insecure-#)^45($@lfw6aj2#mwqh#b84!&qej*85z0j+a7yby80efi++_e
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # React development server
+    'http://localhost:3000',
+    'http://localhost:5173',  # React development server
     #'https://yourdomain.com',  # Your deployed frontend
 ]
 
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "skip-auth",
+]
 
 # Application definition
 

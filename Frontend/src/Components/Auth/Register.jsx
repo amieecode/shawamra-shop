@@ -31,8 +31,7 @@ const Register = () => {
                 setError("Failed to retrieve token. Try again.");
             }
         } catch (err) {
-          console.error(err.response?.data || err.message);
-          setError(err.response?.data?.error || "Something went wrong. Please check your inputs.");
+          setError("Something went wrong. Please check your inputs.");
       }
     };
     
