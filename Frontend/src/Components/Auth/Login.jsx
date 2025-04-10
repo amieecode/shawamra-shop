@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../../api/auth';
+import { getProfile, loginUser } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { SiSaucelabs } from "react-icons/si";
 import { FiArrowLeft } from "react-icons/fi";
@@ -23,8 +23,13 @@ const Login = () => {
     try {
       const data = await loginUser(formData);
       localStorage.setItem("token", data.token);
+
+      // Fetch User profile after successful
+      const userProfile = await getProfile();
+      localStorage.setItem("user", JSON.stringify(userProfile));
+
       setError("");
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       console.error("Login error:", err);
       setError("Invalid credentials. Please try again.");

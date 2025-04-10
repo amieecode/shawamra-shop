@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Home from "./pages/Home";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
+import Home from "./pages/Home";
 
 const App = () => {
   useEffect (() => {
