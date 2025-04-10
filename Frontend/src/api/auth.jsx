@@ -31,12 +31,17 @@ export const logoutUSer = async () => {
     return response.data;
 };
 
-export const fetchUserProfile = async () => {
+export const getProfile = async () => {
     const response = await api.get("/auth/profile");
     return response.data;
 };
 
-export const updateUserProfile = async (data) => {
-    const response = await api.put("/auth/profile/update/", data);
+export const updateProfile = async (profileData) => {
+    const response = await api.put("/auth/profile/update/", profileData);
     return response.data;
 };
+
+
+
+
+// Cart 
