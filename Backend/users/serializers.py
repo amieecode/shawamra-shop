@@ -2,6 +2,8 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=False, allow_blank=True)
+
     class Meta:
         model = User
         fields = [
@@ -26,8 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
     def update(self, instance, validated_data):
-        # Hash the password if it is being updated
-        if 'password' in validated_data:
-            instance.set_password(validated_data['password'])
-            validated_data.pop('password')
+        password = validated_data.pop('password', None)
+        if password:
+            instance.set_password(password)
         return super().update(instance, validated_data)

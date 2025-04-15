@@ -34,6 +34,8 @@ const Menus = [
   },
 ]
 const NavBar = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  
   const [activeMenu, setActiveMenu] = useState("Home");
   const [showMenu, setShowMenu] = useState(false);
 
