@@ -42,6 +42,3 @@ export const updateProfile = async (profileData) => {
 };
 
 
-
-
-// Cart 
