@@ -1,7 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import HeroImg from '../../assets/hero.png';
 
+
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='min-h-[550px] sm:min-h-[600px] bg-black text-white flex justify-center items-center mt-8'>
        <div className='container pb-8 sm:pb-0'>
@@ -27,7 +31,7 @@ const Hero = () => {
                 <div data-aos="fade-up" data-aos-delay="700" className='flex gap-4'>
                   <button className='brand-btn'>Order now</button>
                   {" "}
-                  <button className='brand-btn'>View Menu</button>
+                  <button onClick={() => navigate('/menu')} className='brand-btn'>View Menu</button>
                 </div>
               </div>
               {/*Image Section*/}

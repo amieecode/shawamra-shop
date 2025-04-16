@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { updateProfile } from '../../api/auth';
 
 const UpdateProfile = () => {
     const navigate = useNavigate();
@@ -35,6 +36,9 @@ const UpdateProfile = () => {
         const updateUser = await updateProfile(formData);
         localStorage.setItem('user', JSON.stringify(updateUser));
         setMessage('Profile updated successfully');
+
+        // Redirect to dashboard
+         setTimeout(() => navigate('/dashboard'), 1000);
        } catch (err) {
         console.error("Error updating profile:", err.response?.data || err.message);
         setMessage('Failed to update profile.\Please try again.');
