@@ -52,7 +52,9 @@ const Login = () => {
         {/* Logo + Title */}
         <div className="flex flex-col items-center my-4">
           <div className="flex items-center gap-2 text-3xl font-bold text-brand">
-            <SiSaucelabs />
+            <a href='/'>
+              <SiSaucelabs />
+            </a>
           </div>
           <h2 className='mt-4 mb-2'>Welcome back to Shawamra</h2>
           <p className="text-gray-600 text-sm text-center mb-2">Type your e-mail and password to log in or create a Shawamra account.</p>
