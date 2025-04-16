@@ -7,8 +7,9 @@ const Menu = () => {
   return (
     <div className="overflow-x-hidden bg-black text-white">
         <NavBar />
-        {""}
-        <Specialties />
+        <div className="mt-28"> {/* Adjust the value as per your preference */}
+          <Specialties />
+        </div>
         <Footer />
     </div>
   )

@@ -29,7 +29,7 @@ const Hero = () => {
                 </p>
               
                 <div data-aos="fade-up" data-aos-delay="700" className='flex gap-4'>
-                  <button className='brand-btn'>Order now</button>
+                  <button onClick={() => navigate('/#')} className='brand-btn'>Order now</button>
                   {" "}
                   <button onClick={() => navigate('/menu')} className='brand-btn'>View Menu</button>
                 </div>
