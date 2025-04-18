@@ -27,7 +27,7 @@ const ProductPAge = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ProductPAge;
