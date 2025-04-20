@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductCard from '../Components/ProductCard';
 import api from '../axios';
 
-const ProductPAge = () => {
+const ProductPage = () => {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = async () => {
@@ -30,4 +30,4 @@ const ProductPAge = () => {
   );
 };
 
-export default ProductPAge;
+export default ProductPage;

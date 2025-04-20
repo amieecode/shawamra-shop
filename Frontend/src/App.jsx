@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
+import ProductPage from "./pages";
 
 
 const App = () => {
@@ -29,8 +30,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/profile-update" element={<ProfileUpdate />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/menu" element={<Menu />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/menu" element={<ProductPage />} />
       </Routes>
     </Router>
      
