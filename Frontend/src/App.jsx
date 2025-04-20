@@ -6,10 +6,9 @@ import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
 import ProfileUpdate from "./Components/Auth/UpdateProfile";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
-import ProductPage from "./pages";
+import Dashboard from "./pages/Dashboard";
+import ProductPage from "./pages/ProductPAge";
 
 
 const App = () => {
