@@ -3,7 +3,7 @@ import BeefImg from "../../assets/beef-wrap.png";
 import ChickenImg from "../../assets/Chicken-wrap.png";
 import KechupImg from "../../assets/kechup-wrap.png";
 import { color } from 'framer-motion';
-
+import { addToCart } from '../../api/cart';
 const SpecialtiesData =[
   {
     id: 1,
