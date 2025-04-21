@@ -77,9 +77,9 @@ const NavBar = () => {
            <a href="/register" className='text-white text-2xl cursor-pointer'>
               <GoPerson />
             </a>
-            <button className='text-white text-2xl cursor-pointer'>
+            <a href='/cart' className='text-white text-2xl cursor-pointer'>
               <CgShoppingCart />
-            </button> 
+            </a> 
           
           
             {/*Mobile Hamburger Menu Section*/}

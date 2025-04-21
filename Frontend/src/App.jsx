@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Dashboard from "./pages/Dashboard";
 import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/menu" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </Router>
      
