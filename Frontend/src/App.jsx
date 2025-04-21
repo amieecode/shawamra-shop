@@ -8,7 +8,7 @@ import ProfileUpdate from "./Components/Auth/UpdateProfile";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Dashboard from "./pages/Dashboard";
-import ProductPage from "./pages/ProductPAge";
+import ProductPage from "./pages/ProductPage";
 
 
 const App = () => {

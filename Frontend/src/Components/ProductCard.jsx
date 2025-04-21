@@ -1,5 +1,5 @@
 import React from 'react'
-import { addToCart } from '../api/cartApi'
+import { addToCart } from '../api/cart'
 
 const ProductCard = ({ product }) => {
     const handleAddToCart = async (productId) =>{
