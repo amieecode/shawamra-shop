@@ -1,6 +1,5 @@
-import api from "../axios";
 import axios from "axios";
-
+import api from "../axios";
 
 
 export const getAllProducts = () => {

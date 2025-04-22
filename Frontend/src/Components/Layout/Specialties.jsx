@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import BeefImg from "../../assets/beef-wrap.png";
 //import ChickenImg from "../../assets/Chicken-wrap.png";
 //import KechupImg from "../../assets/kechup-wrap.png";
-import { getAllProducts } from '../../api/cart';
+import { getAllProducts, addToCart } from '../../api/cart';
 import ProductCard from '../ProductCard';
 
 

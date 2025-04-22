@@ -24,23 +24,19 @@ const CartPage = () => {
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <ul className='space-y-4'>
-            {cartItems.map((item) => (
-                <li 
-                    key={item.id}
-                    className='bg-white text-black p-4 rounded-lg flex justify-between items-center'
-                >
-                  <div>
-                    <p className='font-bold'>{item.product.name}</p>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Price: ${item.product.price}</p>
-                  </div>
-                  <p className='font-semibold'>
-                    Total: ${item.product.price * item.quantity}
-                  </p>
-                </li>
-            ))}
-        </ul>
+          cartItems.map((item) => (
+            <div key={item.id} className='bg-white shadow-md rounded-lg p-4 mb-4 w-full max-w-md mx-auto'>
+                <img
+                  src={item.product.image}
+                  alt={item.product.name}
+                  className='w-32 h-32 object-cover rounded mx-auto'
+                />
+                <h2 className='text-2xl font-semibold mt-2 text-center'>{item.product.name}</h2>
+                <p className='text-center'>Quantity: {item.quantity}</p>
+                <p className='text-center'>Price: ${item.product.price}</p>
+                <p className='text-center font-bold'>Total: ${item.total_price}</p>
+            </div>
+        ))
       )}
     </div>
   );
