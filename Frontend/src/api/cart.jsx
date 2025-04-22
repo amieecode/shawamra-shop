@@ -1,5 +1,11 @@
 import api from "../axios";
+import axios from "axios";
 
+
+
+export const getAllProducts = () => {
+    return axios.get("http://127.0.0.1:8000/api/products/");
+  };
 
 // Get all cart items for the user
 export const getCartItems = async () => {
