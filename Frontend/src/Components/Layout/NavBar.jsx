@@ -74,11 +74,13 @@ const NavBar = () => {
 
           {/*Icons section*/}
           <div className='flex items-center gap-6'>
-           <a href="/register" className='text-white text-2xl cursor-pointer'>
-              <GoPerson />
+           <a href="/register" className='flex text-white text-xl cursor-pointer'>
+              <GoPerson  className='gap-2'/> 
+              Account
             </a>
-            <a href='/cart' className='text-white text-2xl cursor-pointer'>
+            <a href='/cart' className='flex text-white text-xl cursor-pointer'>
               <CgShoppingCart />
+              Cart
             </a> 
           
           
