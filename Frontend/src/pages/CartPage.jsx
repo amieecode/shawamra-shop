@@ -11,6 +11,7 @@ const CartPage = () => {
       setCartItems(data);
     } catch (err) {
       console.error(err);
+
       alert("Failed to load cart");
     }
   };
@@ -88,7 +89,7 @@ const CartPage = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleQuantityDecrease(item.id)}
-                      className="w-8 h-8 bg-gray-300 text-gray-800 rounded-full hover:bg-gray-400"
+                      className="w-8 h-8 bg-brand text-white rounded-full hover:bg-brand/80"
                     >
                       -
                     </button>
@@ -102,7 +103,7 @@ const CartPage = () => {
                     />
                     <button
                       onClick={() => handleQuantityIncrease(item.id)}
-                      className="w-8 h-8 bg-gray-300 text-gray-800 rounded-full hover:bg-gray-400"
+                      className="w-8 h-8 bg-brand text-white rounded-full font-bold hover:bg-brand/80"
                     >
                       +
                     </button>
@@ -122,8 +123,8 @@ const CartPage = () => {
                 <span>Total Price:</span>
                 <span>${calculateTotal()}</span>
               </div>
-              <button className="mt-6 w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition">
-                Proceed to Checkout
+              <button className="mt-6 w-full bg-brand text-white py-2 rounded-lg hover:bg-purple-700 transition">
+                Checkout
               </button>
             </div>
           </div>
