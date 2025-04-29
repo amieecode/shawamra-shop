@@ -73,15 +73,23 @@ const NavBar = () => {
           </div>
 
           {/*Icons section*/}
-          <div className='flex items-center gap-6'>
-           <a href="/register" className='flex text-white text-xl cursor-pointer'>
-              <GoPerson  className='gap-2'/> 
-              Account
+          <div className='flex items-center gap-8'>
+           <a href="/register" className='flex items-center gap-2 text-white cursor-pointer'>
+              <GoPerson className='text-2xl hover:text-brand'/> 
+              <span>Account</span>
             </a>
-            <a href='/cart' className='flex text-white text-xl cursor-pointer'>
-              <CgShoppingCart />
-              Cart
-            </a> 
+            <a href='/cart' className='relative flex items-center gap-2 text-white text-xl cursor-pointer'>
+              {/* Cart Icon with Badge */}
+              <div className='relative'>
+                <CgShoppingCart className='text-2xl' />
+
+                {/* Badge */}
+                <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-0.5 py-[0.1rem] rounded-full'>
+                  3
+                </span>
+              </div>
+              <span>Cart</span>
+            </a>
           
           
             {/*Mobile Hamburger Menu Section*/}
