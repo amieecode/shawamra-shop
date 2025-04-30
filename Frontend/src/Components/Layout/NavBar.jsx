@@ -84,7 +84,7 @@ const NavBar = () => {
                 <CgShoppingCart className='text-2xl' />
 
                 {/* Badge */}
-                <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-0.5 py-[0.1rem] rounded-full'>
+                <span className='absolute -top-1 -right-1 bg-brand text-white text-xs font-bold px-1 py-[0.02rem] rounded-full'>
                   3
                 </span>
               </div>
