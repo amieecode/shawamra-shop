@@ -74,10 +74,46 @@ const NavBar = () => {
 
           {/*Icons section*/}
           <div className='flex items-center gap-8'>
-           <a href="/register" className='flex items-center gap-2 text-white cursor-pointer'>
-              <GoPerson className='text-2xl hover:text-brand'/> 
-              <span>Account</span>
-            </a>
+           {/* Account Dropdown */}
+<div className='relative'>
+  <div 
+    onClick={() => setShowMenu(prev => ({ ...prev, account: !prev?.account }))}
+    className='flex items-center gap-2 text-white cursor-pointer'
+  >
+    <GoPerson className='text-2xl hover:text-brand' /> 
+    <span>Account</span>
+  </div>
+
+  {/* Dropdown */}
+  {showMenu?.account && (
+    <div className='absolute right-0 mt-3 w-48 bg-white rounded-md shadow-md z-20 overflow-hidden text-sm'>
+      {/* Sign In Header */}
+      <div className='bg-brand text-white px-4 py-2 font-semibold'>
+        Sign In
+      </div>
+      <hr className='border-gray-200' />
+
+      <a href="/profile" className="block px-4 py-2 hover:bg-gray-100 text-gray-800">
+        My Profile
+      </a>
+      <a href="/orders" className="block px-4 py-2 hover:bg-gray-100 text-gray-800">
+        Orders
+      </a>
+      <button 
+        onClick={() => {
+          localStorage.removeItem('user');
+          window.location.href = '/login';
+        }} 
+        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-800"
+      >
+        Logout
+      </button>
+    </div>
+  )}
+</div>
+
+
+            {/* Cart Season*/}
             <a href='/cart' className='relative flex items-center gap-2 text-white text-xl cursor-pointer'>
               {/* Cart Icon with Badge */}
               <div className='relative'>
