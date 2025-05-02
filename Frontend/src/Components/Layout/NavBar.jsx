@@ -38,8 +38,9 @@ const NavBar = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   
   const [activeMenu, setActiveMenu] = useState("Home");
-  const [showMenu, setShowMenu] = useState(false);
-
+  const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   return (
     <> 
       <nav className='bg-black text-white fixed top-0 shadow-md z-10 w-full'>
@@ -78,21 +79,21 @@ const NavBar = () => {
            {/* Account Dropdown */}
             <div className='relative'>
               <div 
-                onClick={() => setShowMenu(prev => ({ ...prev, account: !prev?.account }))}
+                onClick={() => setAccountDropdownOpen(prev => ({ ...prev, account: !prev?.account }))}
                 className='flex items-center gap-1 text-white cursor-pointer hover:text-brand'
               >
                 <GoPerson className='text-2xl' /> 
                 <span className="flex items-center gap-1">
                   Account
                   <FaChevronDown 
-                    className={`transition-transform duration-300 ${showMenu?.account ? 'rotate-180' : ''}`} 
+                    className={`transition-transform duration-300 ${accountDropdownOpen?.account ? 'rotate-180' : ''}`} 
                   />
                 </span>
               </div>
 
 
               {/* Dropdown */}
-                {showMenu?.account && (
+                {accountDropdownOpen?.account && (
                 <div className='absolute left-1/2 transform -translate-x-1/2 mt-3 w-56 bg-white rounded-md shadow-md z-20 overflow-hidden text-sm'>
                   
                   {/* Sign In as a button */}
@@ -146,7 +147,7 @@ const NavBar = () => {
           
           
             {/*Mobile Hamburger Menu Section*/}
-            <div className='lg:hidden' onClick={() => setShowMenu(!showMenu)}>
+            <div className='lg:hidden' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <MdMenu className="text-4xl cursor-pointer" />
             </div>
           </div>
@@ -154,7 +155,7 @@ const NavBar = () => {
     </nav>
 
         {/*Mobile Nav Menu*/}
-          <ResponsiveMenu open={showMenu} />
+          <ResponsiveMenu open={mobileMenuOpen} />
     </>
   )
 }
