@@ -75,7 +75,7 @@ const NavBar = () => {
           </div>
 
           {/*Icons section*/}
-          <div className='flex items-center gap-8'>
+          <div className='flex items-center gap-6'>
            {/* Account Dropdown */}
             <div className='relative'>
               <div 
@@ -94,7 +94,7 @@ const NavBar = () => {
 
               {/* Dropdown */}
                 {accountDropdownOpen?.account && (
-                <div className='absolute left-1/2 transform -translate-x-1/2 mt-3 w-56 bg-white rounded-md shadow-md z-20 overflow-hidden text-sm'>
+                <div className='absolute left-1/2 transform -translate-x-1/2 mt-3 w-48 bg-white rounded-md shadow-md z-20 overflow-hidden text-sm'>
                   
                   {/* Sign In as a button */}
                   <div className="flex justify-center items-center px-4 py-4">
