@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GoPerson } from "react-icons/go";
 import { CgShoppingCart } from "react-icons/cg";
 import { SiSaucelabs } from "react-icons/si";
+import { FaBoxOpen, FaSignOutAlt, FaChevronDown } from "react-icons/fa";
 import { MdMenu } from "react-icons/md"
 import ResponsiveMenu from './ResponsiveMenu';
 import { motion } from "framer-motion";
@@ -75,46 +76,62 @@ const NavBar = () => {
           {/*Icons section*/}
           <div className='flex items-center gap-8'>
            {/* Account Dropdown */}
-<div className='relative'>
-  <div 
-    onClick={() => setShowMenu(prev => ({ ...prev, account: !prev?.account }))}
-    className='flex items-center gap-2 text-white cursor-pointer'
-  >
-    <GoPerson className='text-2xl hover:text-brand' /> 
-    <span>Account</span>
-  </div>
+            <div className='relative'>
+              <div 
+                onClick={() => setShowMenu(prev => ({ ...prev, account: !prev?.account }))}
+                className='flex items-center gap-1 text-white cursor-pointer hover:text-brand'
+              >
+                <GoPerson className='text-2xl' /> 
+                <span className="flex items-center gap-1">
+                  Account
+                  <FaChevronDown 
+                    className={`transition-transform duration-300 ${showMenu?.account ? 'rotate-180' : ''}`} 
+                  />
+                </span>
+              </div>
 
-  {/* Dropdown */}
-  {showMenu?.account && (
-    <div className='absolute right-0 mt-3 w-48 bg-white rounded-md shadow-md z-20 overflow-hidden text-sm'>
-      {/* Sign In Header */}
-      <div className='bg-brand text-white px-4 py-2 font-semibold'>
-        Sign In
-      </div>
-      <hr className='border-gray-200' />
 
-      <a href="/profile" className="block px-4 py-2 hover:bg-gray-100 text-gray-800">
-        My Profile
-      </a>
-      <a href="/orders" className="block px-4 py-2 hover:bg-gray-100 text-gray-800">
-        Orders
-      </a>
-      <button 
-        onClick={() => {
-          localStorage.removeItem('user');
-          window.location.href = '/login';
-        }} 
-        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-800"
-      >
-        Logout
-      </button>
-    </div>
-  )}
-</div>
+              {/* Dropdown */}
+                {showMenu?.account && (
+                <div className='absolute left-1/2 transform -translate-x-1/2 mt-3 w-56 bg-white rounded-md shadow-md z-20 overflow-hidden text-sm'>
+                  
+                  {/* Sign In as a button */}
+                  <div className="flex justify-center items-center px-4 py-4">
+                    <a
+                      href="/login"
+                      className="bg-brand text-white font-semibold px-6 py-2 rounded-md w-full text-center hover:opacity-90 transition"
+                    >
+                      Sign In
+                    </a>
+                  </div>
 
+                  <hr className='border-gray-200' />
+
+                  <a href="/profile" className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-gray-800">
+                    <GoPerson className='text-xl' />
+                    My Profile
+                  </a>
+                  <a href="/orders" className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-gray-800">
+                    <FaBoxOpen className='text-lg' />
+                    Orders
+                  </a>
+                  <button 
+                    onClick={() => {
+                      localStorage.removeItem('user');
+                      window.location.href = '/login';
+                    }} 
+                    className="w-full flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-gray-800"
+                  >
+                    <FaSignOutAlt className='text-lg' />
+                    Logout
+                  </button>
+                </div>
+                )}
+
+            </div>
 
             {/* Cart Season*/}
-            <a href='/cart' className='relative flex items-center gap-2 text-white text-xl cursor-pointer'>
+            <a href='/cart' className='relative flex items-center gap-2 text-white text-xl cursor-pointer hover:text-brand'>
               {/* Cart Icon with Badge */}
               <div className='relative'>
                 <CgShoppingCart className='text-2xl' />
