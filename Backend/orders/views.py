@@ -37,6 +37,9 @@ class OrderListCreateView(generics.ListCreateAPIView):
                 return Response({"error": f"Product with ID {item['product']} not found"}, status=status.HTTP_400_BAD_REQUEST)
 
         OrderItem.objects.bulk_create(order_items)
+
+        Cart.objects.filter(user=user).delete()
+
         return Response(OrderSerializers(order).data, status=status.HTTP_201_CREATED)
 
 class OrderDetailedView(generics.RetrieveUpdateAPIView):
