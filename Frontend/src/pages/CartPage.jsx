@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { getCartItems } from '../api/cart';
 import { FaTrashAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../Redux/cartSlice'; // import the action for clearing the cart
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for page navigation
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize navigate function
 
   const fetchCart = async () => {
     try {
@@ -11,7 +17,6 @@ const CartPage = () => {
       setCartItems(data);
     } catch (err) {
       console.error(err);
-
       alert("Failed to load cart");
     }
   };
@@ -20,30 +25,28 @@ const CartPage = () => {
     fetchCart();
   }, []);
 
+  const handlePlaceOrder = async () => {
+    try {
+      const response = await axios.post("/api/orders/", {
+        items: cartItems.map(item => ({
+          product: item.id,
+          quantity: item.quantity,
+        })),
+      });
+
+      if (response.status === 201) {
+        dispatch(clearCart()); // Clear Redux state
+        toast.success("Order placed!");
+        navigate("/orders"); // Navigate to the orders page after successful order placement
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to place order");
+    }
+  };
+
   const calculateTotal = () => {
     return cartItems.reduce((acc, item) => acc + parseFloat(item.total_price), 0).toFixed(2);
-  };
-
-  const handleRemoveItem = (id) => {
-    console.log('Remove item with id:', id);
-  };
-
-  const handleQuantityChange = (id, quantity) => {
-    console.log('Update quantity for item with id:', id, 'to', quantity);
-  };
-
-  const handleQuantityIncrease = (id) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setCartItems(updatedCart);
-  };
-
-  const handleQuantityDecrease = (id) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-    );
-    setCartItems(updatedCart);
   };
 
   return (
@@ -123,8 +126,11 @@ const CartPage = () => {
                 <span>Total Price:</span>
                 <span>${calculateTotal()}</span>
               </div>
-              <button className="mt-6 w-full bg-brand text-white py-2 rounded-lg hover:bg-purple-700 transition">
-                Checkout
+              <button
+                onClick={handlePlaceOrder}
+                className="mt-6 w-full bg-brand text-white py-2 rounded-lg hover:bg-purple-700 transition"
+              >
+                Place Order
               </button>
             </div>
           </div>
