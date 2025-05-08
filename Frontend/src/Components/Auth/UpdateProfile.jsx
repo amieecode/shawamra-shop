@@ -37,8 +37,8 @@ const UpdateProfile = () => {
         localStorage.setItem('user', JSON.stringify(updateUser));
         setMessage('Profile updated successfully');
 
-        // Redirect to dashboard
-         setTimeout(() => navigate('/dashboard'), 1000);
+        // Redirect to profile
+         setTimeout(() => navigate('/profile'), 1000);
        } catch (err) {
         console.error("Error updating profile:", err.response?.data || err.message);
         setMessage('Failed to update profile.\Please try again.');

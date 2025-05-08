@@ -4,11 +4,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
+import Profile from "./Components/Auth/Profile";
 import ProfileUpdate from "./Components/Auth/UpdateProfile";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
 import CartPage from "./pages/CartPage";
-
+import OrderPage from "./pages/OrderPage";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 const App = () => {
   useEffect (() => {
@@ -26,9 +27,11 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/profile-update" element={<ProfileUpdate />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrderPage />} />
+        <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
       </Routes>
     </Router>
      

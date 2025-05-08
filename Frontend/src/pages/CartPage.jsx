@@ -37,7 +37,7 @@ const CartPage = () => {
       if (response.status === 201) {
         dispatch(clearCart()); // Clear Redux state
         toast.success("Order placed!");
-        navigate("/orders"); // Navigate to the orders page after successful order placement
+        navigate(`/order-confirmation/${response.data.id}`); // Navigate to the orders page after successful order placement
       }
     } catch (error) {
       console.error(error);
