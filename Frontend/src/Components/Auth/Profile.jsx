@@ -11,7 +11,12 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get('/api/auth/profile/');
+        const { data } = await axios.get('http://localhost:8000/api/auth/profile/', {
+          headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+          },
+        });
+        console.log("Profile data:", data)
         setUser(data);
       } catch (error) {
         console.error(error);
@@ -20,7 +25,11 @@ const Profile = () => {
 
     const fetchOrders = async () => {
       try {
-        const { data } = await axios.get('/api/orders/');
+        const { data } = await axios.get('http://localhost:8000/api/orders/', {
+          headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+          },
+        });
         setOrders(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error(error);
