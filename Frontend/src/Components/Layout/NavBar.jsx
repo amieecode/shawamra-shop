@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoPerson } from "react-icons/go";
 import { CgShoppingCart } from "react-icons/cg";
 import { SiSaucelabs } from "react-icons/si";
@@ -20,6 +20,13 @@ const NavBar = () => {
   const [activeMenu, setActiveMenu] = useState("Home");
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setCartItemCount(totalItems);
+  }, []);
 
   return (
     <>
@@ -28,7 +35,7 @@ const NavBar = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className='container mx-auto flex items-center justify-between py-6 px-6 lg:py-8'
+          className='container mx-auto flex items-center justify-between py-4 px-4 sm:px-6 lg:py-6'
         >
           {/* Logo */}
           <div className='flex items-center text-2xl font-cursive'>
@@ -55,12 +62,11 @@ const NavBar = () => {
           </div>
 
           {/* Icons Section */}
-          <div className='flex items-center gap-6'>
-
+          <div className='flex items-center gap-4 sm:gap-6 flex-shrink-0'>
             {/* Account Dropdown */}
-            <div className='relative'>
+            <div className='relative flex-shrink-0'>
               <div 
-                onClick={() => setAccountDropdownOpen(prev => ({ ...prev, account: !prev?.account }))}
+                onClick={() => setAccountDropdownOpen(prev => ({ ...prev, account: !prev?.account }))} 
                 className='flex items-center gap-1 text-white cursor-pointer hover:text-brand'
               >
                 <GoPerson className='text-2xl' /> 
@@ -111,26 +117,26 @@ const NavBar = () => {
             </div>
 
             {/* Cart Icon */}
-            <a href='/cart' className='relative flex items-center gap-2 text-white text-xl cursor-pointer hover:text-brand'>
+            <a href='/cart' className='relative flex items-center gap-1 text-white text-xl cursor-pointer hover:text-brand flex-shrink-0'>
               <div className='relative'>
                 <CgShoppingCart className='text-2xl' />
                 <span className='absolute -top-1 -right-1 bg-brand text-white text-xs font-bold px-1 py-[0.02rem] rounded-full'>
-                  3
+                  {cartItemCount > 0 ? cartItemCount : '0'}
                 </span>
               </div>
-              <span>Cart</span>
+              <span className='hidden sm:inline'>Cart</span>
             </a>
 
             {/* Mobile Menu Icon */}
-            <div className='lg:hidden' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              <MdMenu className="text-4xl cursor-pointer" />
+            <div className='lg:hidden flex-shrink-0' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              <MdMenu className="text-3xl sm:text-4xl cursor-pointer" />
             </div>
           </div>
         </motion.div>
       </nav>
 
       {/* Mobile Menu */}
-      <ResponsiveMenu open={mobileMenuOpen} />
+      <ResponsiveMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
     </>
   );
 };

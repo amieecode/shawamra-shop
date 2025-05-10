@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt, FaHome } from 'react-icons/fa';
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
@@ -32,11 +33,34 @@ const OrderPage = () => {
     setExpandedOrderId((prev) => (prev === id ? null : id));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-[#f4f7fc] py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">My Orders</h2>
+        {/* Top Buttons */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+          <h2 className="text-3xl font-bold text-gray-800">My Orders</h2>
+          <div className="flex gap-3 w-full sm:w-auto">
+            <button
+              onClick={() => navigate('/')}
+              className="bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 flex items-center gap-2 text-sm"
+            >
+              <FaHome /> Back to Home
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center gap-2 text-sm"
+            >
+              <FaSignOutAlt /> Logout
+            </button>
+          </div>
+        </div>
 
+        {/* Orders List */}
         {orders.length === 0 ? (
           <div className="bg-white p-6 rounded-xl text-center shadow-sm">
             <p className="text-gray-600 text-lg">🛍️ You haven’t placed any orders yet.</p>
@@ -53,9 +77,7 @@ const OrderPage = () => {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800">
-                        Order #{order.id}
-                      </h3>
+                      <h3 className="text-xl font-bold text-gray-800">Order #{order.id}</h3>
                       <p className="text-gray-500 text-sm">
                         Placed on {new Date(order.created_at).toLocaleDateString()}
                       </p>

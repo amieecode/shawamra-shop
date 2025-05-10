@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { FaSignOutAlt, FaEdit } from 'react-icons/fa';
+import { FaSignOutAlt, FaEdit, FaHome } from 'react-icons/fa';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -50,17 +50,25 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-[#f4f7fc] overflow-x-hidden px-4 sm:px-6 py-6">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-5 sm:p-8 w-full">
-        {/* Header */}
+        {/* Header with Buttons */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 w-full">
           <h2 className="text-2xl font-semibold text-gray-800">
             {user ? `Welcome, ${user.username}!` : 'Your Profile'}
           </h2>
-          <button
-            onClick={handleLogout}
-            className="w-full sm:w-auto bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center justify-center gap-2 text-sm"
-          >
-            <FaSignOutAlt /> Logout
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <button
+              onClick={() => navigate('/')}
+              className="bg-gray-200 text-gray-800 px-6 py-3 rounded-full hover:bg-gray-300 flex items-center justify-center gap-2 text-sm"
+            >
+              <FaHome /> Back to Home
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center justify-center gap-2 text-sm"
+            >
+              <FaSignOutAlt /> Logout
+            </button>
+          </div>
         </div>
 
         {/* Profile section */}
@@ -76,11 +84,11 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Edit Button */}
+            {/* Edit Profile Button */}
             <div className="flex justify-center lg:justify-end items-start w-full">
               <button
                 onClick={() => navigate('/profile-update')}
-                className="w-full sm:w-auto bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center justify-center gap-2 text-sm"
+                className="bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center justify-center gap-2 text-sm"
               >
                 <FaEdit /> Edit Profile
               </button>
