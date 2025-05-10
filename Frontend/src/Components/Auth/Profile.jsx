@@ -9,14 +9,17 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
     const fetchProfile = async () => {
       try {
         const { data } = await axios.get('http://localhost:8000/api/auth/profile/', {
-          headers: {
-            Authorization: `Token ${localStorage.getItem('token')}`
-          },
+          headers: { Authorization: `Token ${token}` },
         });
-        console.log("Profile data:", data)
         setUser(data);
       } catch (error) {
         console.error(error);
@@ -26,9 +29,7 @@ const Profile = () => {
     const fetchOrders = async () => {
       try {
         const { data } = await axios.get('http://localhost:8000/api/orders/', {
-          headers: {
-            Authorization: `Token ${localStorage.getItem('token')}`
-          },
+          headers: { Authorization: `Token ${token}` },
         });
         setOrders(Array.isArray(data) ? data : []);
       } catch (error) {
@@ -39,7 +40,7 @@ const Profile = () => {
 
     fetchProfile();
     fetchOrders();
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -47,30 +48,39 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow rounded-lg p-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Your Profile</h2>
+    <div className="min-h-screen bg-[#f4f7fc] overflow-x-hidden px-4 sm:px-6 py-6">
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-5 sm:p-8 w-full">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 w-full">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            {user ? `Welcome, ${user.username}!` : 'Your Profile'}
+          </h2>
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center gap-2"
+            className="w-full sm:w-auto bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center justify-center gap-2 text-sm"
           >
             <FaSignOutAlt /> Logout
           </button>
         </div>
 
+        {/* Profile section */}
         {user && (
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div>
-              <h4 className="text-lg font-semibold text-gray-700 mb-2">User Info</h4>
-              <p><strong>Username:</strong> {user.username}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Full Name:</strong> {user.first_name} {user.last_name}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+            {/* User Info */}
+            <div className="bg-gray-50 border rounded-xl p-6 shadow-sm w-full">
+              <h4 className="text-lg font-semibold text-gray-700 mb-4">User Info</h4>
+              <div className="space-y-2 text-sm text-gray-600">
+                <p><strong>Username:</strong> {user.username}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Full Name:</strong> {user.first_name} {user.last_name}</p>
+              </div>
             </div>
-            <div className="flex items-start justify-end">
+
+            {/* Edit Button */}
+            <div className="flex justify-center lg:justify-end items-start w-full">
               <button
                 onClick={() => navigate('/profile-update')}
-                className="bg-brand text-white px-4 py-2 rounded hover:bg-brand/80 flex items-center gap-2"
+                className="w-full sm:w-auto bg-brand text-white px-6 py-3 rounded-full hover:bg-brand/90 flex items-center justify-center gap-2 text-sm"
               >
                 <FaEdit /> Edit Profile
               </button>
@@ -78,25 +88,28 @@ const Profile = () => {
           </div>
         )}
 
-        <div>
+        {/* Orders Section */}
+        <div className="w-full">
           <h4 className="text-lg font-semibold text-gray-700 mb-4">Recent Orders</h4>
           {orders.length === 0 ? (
             <p className="text-gray-500">You have no orders yet.</p>
           ) : (
             <div className="space-y-4">
               {orders.slice(0, 3).map((order) => (
-                <div key={order.id} className="border rounded p-4 bg-gray-50">
-                  <p><strong>Order ID:</strong> {order.id}</p>
-                  <p><strong>Status:</strong> {order.status}</p>
-                  <p><strong>Created:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                <div key={order.id} className="bg-gray-50 border rounded-lg p-4 shadow-sm w-full overflow-hidden">
+                  <p className="text-sm text-gray-700"><strong>Order ID:</strong> {order.id}</p>
+                  <p className="text-sm text-gray-700"><strong>Status:</strong> {order.status}</p>
+                  <p className="text-sm text-gray-700"><strong>Created:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
                 </div>
               ))}
-              <button
-                onClick={() => navigate('/orders')}
-                className="mt-4 text-brand hover:underline"
-              >
-                View All Orders
-              </button>
+              <div className="pt-4">
+                <button
+                  onClick={() => navigate('/orders')}
+                  className="text-brand hover:underline text-sm"
+                >
+                  View All Orders
+                </button>
+              </div>
             </div>
           )}
         </div>
