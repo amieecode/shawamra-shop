@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCartItems, removeFromCart, updateCartItem, clearCart } from '../api/cart';
+import { addToCart,getCartItems, removeFromCart, updateCartItem, clearCart } from '../api/cart';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -12,6 +12,16 @@ const Cart = () => {
     useEffect(() => {
         fetchCart();
     }, []);
+
+    const handleAddToCart = async () => {
+        try {
+            await addToCart(product.id, quantity); // quantity = 1 or user-selected
+            toast.success("Item added to cart!");
+        } catch (error) {
+            toast.error("Failed to add to cart");
+            console.error(error);
+        }
+    };
 
     const handleRemove = async (id) => {
         await removeFromCart(id);

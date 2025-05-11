@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { clearCart } from '../Redux/cartSlice'; // import the action for clearing the cart
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for page navigation
+import { removeFromCart } from '../api/cart';  // Make sure the path is correct
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -14,6 +15,7 @@ const CartPage = () => {
   const fetchCart = async () => {
     try {
       const data = await getCartItems();
+      console.log("Cart items:", data);
       setCartItems(data);
     } catch (err) {
       console.error(err);
@@ -42,6 +44,15 @@ const CartPage = () => {
     } catch (error) {
       console.error(error);
       toast.error("Failed to place order");
+    }
+  };
+
+  const handleRemoveItem = async (id) => {
+    try {
+      await axios.delete(`/api/cart/remove/${id}/`);
+      setCartItems(cartItems.filter((item) => item.id !== id));
+      } catch (error) {
+        console.error("Error removing item:", error);
     }
   };
 

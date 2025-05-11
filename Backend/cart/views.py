@@ -37,7 +37,7 @@ class AddToCartView(APIView):
             cart_item.quantity = quantity
 
         cart_item.save()
-        return Response({"message", "Product add to cart"}, status=status.HTTP_201_CREATED)
+        return Response({"message": "Product add to cart"}, status=status.HTTP_201_CREATED)
 
 class UpdateCartView(APIView):
     # update the quantity of the cart
