@@ -50,7 +50,7 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar /> {/* ✅ Navbar included here */}
+      <Navbar /> 
       <div className="min-h-screen bg-[#f4f7fc] overflow-x-hidden px-4 mt-20 sm:px-6 py-6">
         <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-5 sm:p-8 w-full">
           {/* Header with Buttons */}
