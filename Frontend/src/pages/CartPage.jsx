@@ -15,7 +15,7 @@ const CartPage = () => {
   const fetchCart = async () => {
     try {
       const data = await getCartItems();
-      console.log("Cart items:", data);
+      console.log("Cart items:", data)
       setCartItems(data);
     } catch (err) {
       console.error(err);
