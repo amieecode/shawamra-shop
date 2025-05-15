@@ -141,7 +141,7 @@ const CartPage = () => {
                 onClick={handlePlaceOrder}
                 className="mt-6 w-full bg-brand text-white py-2 rounded-lg hover:bg-purple-700 transition"
               >
-                Place Order
+                Order
               </button>
             </div>
           </div>
