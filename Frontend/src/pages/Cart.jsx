@@ -42,7 +42,8 @@ const Cart = () => {
                 <input
                     type='number'
                     value={items.quantity}
-                    onChange={(e) => handleQuantityChange(items.id, e.target.value)}
+                    onChange={(e) => handleQuantityChange(items.id, parseInt(e.target.value) || 1)}
+
                     className='w-16 border'
                 />
                 <button onClick={() => handleRemove(items.id)} className='text-red-500'>Remove</button>
