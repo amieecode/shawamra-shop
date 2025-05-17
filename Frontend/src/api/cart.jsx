@@ -32,7 +32,7 @@ export const updateCartItem = async (id, quantity) => {
 
 // Remove Cart Item
 export const removeFromCart = async (id) => {
-  const response = await axios.delete(`/api/cart/remove/${id}/`);
+  const response = await api.delete(`/cart/remove/${id}/`);
   return response.data;
 };
 
