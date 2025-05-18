@@ -29,7 +29,7 @@ const CartPage = () => {
 
   const updateQuantityOnBackend = async (itemId, quantity) => {
     try {
-      await api.patch(`/cart/update/${itemId}/`, { quantity });
+      await api.put(`/cart/update/${itemId}/`, { quantity });
     } catch (error) {
       console.error(`Failed to update quantity for item ${itemId}:`, error);
       toast.error('Failed to update quantity');
@@ -71,53 +71,75 @@ const CartPage = () => {
   const quantity = Math.max(1, parseInt(value) || 1);
   const previousItems = [...cartItems];
 
-  const updatedItems = cartItems.map(item =>
-    item.id === id ? { ...item, quantity } : item
-  );
-  setCartItems(updatedItems);
+    const updatedItems = cartItems.map(item =>
+      item.id === id
+        ? { 
+            ...item, 
+            quantity, 
+            total_price: (item.product.price * quantity).toFixed(2) 
+          }
+        : item
+    );
+    setCartItems(updatedItems);
 
   try {
     await updateQuantityOnBackend(id, quantity);
   } catch (error) {
     toast.error("Failed to update quantity");
-    setCartItems(previousItems);  // rollback UI on failure
+    setCartItems(previousItems);  // rollback UI
   }
 };
 
 
-  const handleQuantityIncrease = (id) => {
+  const handleQuantityIncrease = async (id) => {
     const updatedItems = cartItems.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      item.id === id
+        ? { 
+            ...item, 
+            quantity: item.quantity + 1, 
+            
+          }
+        : item
     );
     setCartItems(updatedItems);
+
     const updatedItem = updatedItems.find(item => item.id === id);
-    updateQuantityOnBackend(id, updatedItem.quantity);
+    await updateQuantityOnBackend(id, updatedItem.quantity);
   };
 
-    const handleQuantityDecrease = async (id) => {
+
+  const handleQuantityDecrease = async (id) => {
     const currentItem = cartItems.find(item => item.id === id);
-    if (!currentItem || currentItem.quantity <= 1) return;  // Prevent decreasing below 1
+    if (!currentItem || currentItem.quantity <= 1) return;
+
+    const newQuantity = currentItem.quantity - 1;
 
     const updatedItems = cartItems.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+      item.id === id
+        ? { 
+            ...item, 
+            quantity: newQuantity, 
+            total_price: (item.product.price * newQuantity).toFixed(2) 
+          }
+        : item
     );
     setCartItems(updatedItems);
 
     try {
-      await updateQuantityOnBackend(id, currentItem.quantity - 1);
+      await updateQuantityOnBackend(id, newQuantity);
     } catch (error) {
       toast.error('Failed to update quantity');
-      setCartItems(cartItems); // rollback UI on failure
+      setCartItems(cartItems); // rollback
     }
   };
 
 
-
   const calculateTotal = () => {
     return cartItems
-      .reduce((acc, item) => acc + parseFloat(item.total_price), 0)
+      .reduce((acc, item) => acc + item.product.price * item.quantity, 0)
       .toFixed(2);
   };
+
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -150,7 +172,9 @@ const CartPage = () => {
                     </div>
                     <div className="text-right md:min-w-[150px] flex-shrink-0">
                       <p className="text-gray-700 text-sm">Price: ₦{item.product.price}</p>
-                      <p className="text-brand text-sm font-semibold">Total: ₦{item.total_price}</p>
+                      <p className="text-brand text-sm font-semibold">
+                         Total: ₦{(item.product.price * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
 

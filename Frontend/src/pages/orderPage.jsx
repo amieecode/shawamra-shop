@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaSignOutAlt, FaHome } from 'react-icons/fa';
-import Navbar from '../Components/Layout/NavBar'; 
+import NavBar from '../components/Layout/Navbar';
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
@@ -41,7 +40,7 @@ const OrderPage = () => {
 
   return (
     <div className="min-h-screen bg-[#f4f7fc]">
-      <Navbar />
+      <NavBar />
       <div className="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Orders List */}
         <h2 className="text-3xl font-bold text-gray-800 mb-8">My Orders</h2>
