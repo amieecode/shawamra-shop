@@ -134,11 +134,14 @@ const CartPage = () => {
   };
 
 
-  const calculateTotal = () => {
-    return cartItems
-      .reduce((acc, item) => acc + item.product.price * item.quantity, 0)
-      .toFixed(2);
-  };
+    const calculateTotal = () => {
+      return cartItems.reduce((acc, item) => {
+        const price = parseFloat(item?.product?.price) || 0;
+        return acc + price * item.quantity;
+      }, 0).toFixed(2);
+    };
+
+
 
 
   return (
@@ -156,60 +159,63 @@ const CartPage = () => {
             <p className="text-gray-600 text-center py-10">Your cart is empty.</p>
           ) : (
             <div className="space-y-6">
-              {cartItems.map((item) => (
-                <div key={item.id} className="border-b pb-4">
-                  <div className="flex flex-col md:flex-row justify-between gap-4">
-                    <div className="flex gap-4 flex-1 min-w-0">
-                      <img
-                        src={`http://127.0.0.1:8000${item.product.image}`}
-                        alt={item.product.name}
-                        className="w-24 h-24 object-cover rounded border flex-shrink-0"
-                      />
-                      <div className="overflow-hidden">
-                        <h3 className="text-lg font-semibold truncate">{item.product.name}</h3>
-                        <p className="text-sm text-gray-600 truncate">{item.product.description}</p>
+              {cartItems.map((item) => {
+                console.log("Cart Item:", item);
+                return(
+                  <div key={item.id} className="border-b pb-4">
+                    <div className="flex flex-col md:flex-row justify-between gap-4">
+                      <div className="flex gap-4 flex-1 min-w-0">
+                        <img
+                          src={`http://127.0.0.1:8000${item.product.image}`}
+                          alt={item.product.name}
+                          className="w-24 h-24 object-cover rounded border flex-shrink-0"
+                        />
+                        <div className="overflow-hidden">
+                          <h3 className="text-lg font-semibold truncate">{item.product.name}</h3>
+                          <p className="text-sm text-gray-600 truncate">{item.product.description}</p>
+                        </div>
+                      </div>
+                      <div className="text-right md:min-w-[150px] flex-shrink-0">
+                        <p className="text-gray-700 text-sm">Price: ₦{parseFloat(item.product.price || 0).toFixed(2)}</p>
+                        <p className="text-brand text-sm font-semibold">
+                          Total: ₦{(parseFloat(item.product.price || 0) * item.quantity).toFixed(2)}
+                        </p>
                       </div>
                     </div>
-                    <div className="text-right md:min-w-[150px] flex-shrink-0">
-                      <p className="text-gray-700 text-sm">Price: ₦{item.product.price}</p>
-                      <p className="text-brand text-sm font-semibold">
-                         Total: ₦{(item.product.price * item.quantity).toFixed(2)}
-                      </p>
+
+                    <div className="mt-3 flex justify-between items-center">
+                      <button
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="text-red-500 text-sm flex items-center gap-1 hover:text-red-700"
+                      >
+                        <FaTrashAlt /> Remove
+                      </button>
+
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleQuantityDecrease(item.id)}
+                          className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
+                        >
+                          -
+                        </button>
+                        <input
+                          type="number"
+                          value={item.quantity}
+                          onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                          min="1"
+                          className="w-12 text-center border rounded"
+                        />
+                        <button
+                          onClick={() => handleQuantityIncrease(item.id)}
+                          className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="mt-3 flex justify-between items-center">
-                    <button
-                      onClick={() => handleRemoveItem(item.id)}
-                      className="text-red-500 text-sm flex items-center gap-1 hover:text-red-700"
-                    >
-                      <FaTrashAlt /> Remove
-                    </button>
-
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleQuantityDecrease(item.id)}
-                        className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="number"
-                        value={item.quantity}
-                        onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                        min="1"
-                        className="w-12 text-center border rounded"
-                      />
-                      <button
-                        onClick={() => handleQuantityIncrease(item.id)}
-                        className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
