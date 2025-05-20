@@ -19,21 +19,43 @@ const Register = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const data = await registerUser(formData);
-            const token = data.token 
+  e.preventDefault();
 
-            if (token) {
-                localStorage.setItem("token", token); 
-                navigate("/login");
-            } else {
-                setError("Failed to retrieve token. Try again.");
-            }
-        } catch (err) {
-          setError("Something went wrong. Please check your inputs.");
-      }
-    };
+  try {
+    const data = await registerUser(formData);  // call API
+    const token = data.token;
+
+    if (token) {
+      localStorage.setItem("token", token);  // save token if success
+      navigate("/login");                    // go to login page
+    } else {
+      setError("Failed to retrieve token. Try again.");  // fallback error
+    }
+
+  } catch (err) {
+  if (err.response && err.response.data) {
+    const data = err.response.data;
+    console.log("Registration error response:", data); // <-- You'll now see actual error details
+
+    // Handle known error fields
+    if (data.username) {
+      setError(`Username: ${data.username[0]}`);
+    } else if (data.email) {
+      setError(`Email: ${data.email[0]}`);
+    } else if (data.password) {
+      setError(`Password: ${data.password[0]}`);
+    } else {
+      // Fallback: show any other first error
+      const firstKey = Object.keys(data)[0];
+      setError(`${firstKey}: ${data[firstKey][0]}`);
+    }
+  } else {
+    setError("Registration failed. Please try again.");
+  }
+}
+
+};
+
     
 
     return (

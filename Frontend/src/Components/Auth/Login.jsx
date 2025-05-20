@@ -17,14 +17,39 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Sync local cart in localStorage to backend after login
+  const syncCartToBackend = async (token) => {
+    const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    for (let item of localCart) {
+      await fetch('/api/cart/add/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify({
+          product: item.product.id,
+          quantity: item.quantity
+        })
+      });
+    }
+
+    // Clear local cart after syncing
+    localStorage.removeItem('cart');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData); 
+    console.log("Form Data:", formData);
     try {
       const data = await loginUser(formData);
       localStorage.setItem("token", data.token);
 
-      // Fetch User profile after successful
+      // Sync cart to backend after login
+      await syncCartToBackend(data.token);
+
+      // Fetch User profile after successful login and cart sync
       const userProfile = await getProfile();
       localStorage.setItem("user", JSON.stringify(userProfile));
 
@@ -39,7 +64,7 @@ const Login = () => {
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-100 px-4'>
       <div className='max-w-md w-full p-6 bg-white shadow rounded-lg relative'>
-        
+
         {/* Back Arrow */}
         <button 
           onClick={() => navigate('/')} 

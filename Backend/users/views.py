@@ -21,6 +21,19 @@ def register_user(request):
         token, created = Token.objects.get_or_create(user=user)
         print(f"User created: {user.username}")  # Add logging
         return Response({"token": token.key, "user": serializer.data})
+    
+        # Check for username uniqueness error
+        errors = serializer.errors
+        print(f"Registration errors: {errors}")  # Logging
+
+        if 'username' in errors:
+            for error in errors['username']:
+                if 'unique' in str(error).lower():
+                    return Response({"username": ["Username already exists."]}, status=400)
+
+        # Default error response if not username unique error
+        return Response(errors, status=400)
+
     print(f"Registration errors: {serializer.errors}")  # Add logging
     return Response(serializer.errors, status=400)
 
