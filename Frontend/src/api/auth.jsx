@@ -21,7 +21,7 @@ export const registerUser = async (formData) => {
   } catch (error) {
     // axios errors have a response object
     if (error.response) {
-      const err = new Error('Registration failed');
+      const err = new Error('Registration Failed');
       err.response = error.response.data;
       throw err;
     }
